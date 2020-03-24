@@ -31,7 +31,6 @@ html {
 
 body {
   background: linear-gradient(to bottom, #ff5e86, #ff8355);
-  background-repeat: no-repeat;
 }
 
 *,
