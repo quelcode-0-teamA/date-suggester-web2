@@ -22,9 +22,10 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
   margin: 0 auto;
+  max-width: 100%;
   /* min-height: 100vh; */
   display: flex;
   justify-content: center;

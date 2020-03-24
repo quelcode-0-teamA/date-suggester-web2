@@ -15,7 +15,11 @@ export default {
 </script>
 <style>
 html,
-body {
+body,
+#__nuxt,
+#__layout,
+#__layout > div {
+  width: 100%;
   height: 100%;
 }
 html {
@@ -26,7 +30,7 @@ html {
 }
 
 body {
-  background: linear-gradient(to bottom, #ff5d89, #ff8355);
+  background: linear-gradient(to bottom, #ff5e86, #ff8355);
   background-repeat: no-repeat;
 }
 
