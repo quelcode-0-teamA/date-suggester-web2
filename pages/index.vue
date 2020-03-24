@@ -1,43 +1,28 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        date-suggester-web2
-      </h1>
-      <h2 class="subtitle">
-        My great Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div class="background">
+    <div class="container">
+      <base-button>早速デートプランを探す</base-button>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
+import BaseButton from '@/components/BaseButton.vue'
 export default {
   components: {
-    Logo
+    BaseButton
   }
 }
 </script>
 
 <style>
+.background {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #ff5d89, #ff8355);
+}
 .container {
   margin: 0 auto;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
