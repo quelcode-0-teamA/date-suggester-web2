@@ -1,7 +1,14 @@
 <template>
-  <div class="background">
-    <div class="container">
-      <base-button>早速デートプランを探す</base-button>
+  <div class="container">
+    <div class="top-page">
+      <nuxt-link class="top-page__button" to="questions">
+        <base-button>早速デートプランを探す</base-button>
+      </nuxt-link>
+      <img
+        class="top-page__image"
+        src="../assets/topimage.png"
+        alt="男性が女性を抱き抱えてるイメージです"
+      />
     </div>
   </div>
 </template>
@@ -15,11 +22,7 @@ export default {
 }
 </script>
 
-<style>
-.background {
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #ff5d89, #ff8355);
-}
+<style lang="scss">
 .container {
   margin: 0 auto;
   /* min-height: 100vh; */
@@ -28,26 +31,18 @@ export default {
   align-items: center;
   text-align: center;
 }
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+.top-page {
+  padding: 140px 20px 0;
+  &__button {
+    display: block;
+    margin-top: 100px;
+  }
+  &__image {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 </style>

@@ -24,22 +24,25 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .button {
+  width: 308px;
+  max-width: 100%;
   $height: 52px;
   height: $height;
   border-radius: $height / 2;
   border: 1px white solid;
   color: white;
-  display: inline-flex;
+  // display: inline-flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
   background: transparent;
   text-align: center;
-  font-weight: 600;
-  white-space: nowrap;
+  font-size: 100%;
+  font-weight: bold;
   transition: all 0.2s linear;
+  cursor: pointer;
 }
 .button:hover {
   background-color: rgba($color: white, $alpha: 0.34);
