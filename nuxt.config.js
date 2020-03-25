@@ -47,7 +47,12 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: `https://api-date-suggester-dev.herokuapp.com/v1/`,
+    headers: {
+      common: { 'Content-Type': 'application/json' }
+    }
+  },
   /*
    ** Build configuration
    */

@@ -37,7 +37,7 @@ export default {
     display: block;
   }
   &__image {
-    width: 860px;
+    width: 1100px;
     max-width: 100%;
     display: block;
     position: absolute;
