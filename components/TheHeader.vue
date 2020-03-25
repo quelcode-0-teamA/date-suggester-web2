@@ -14,10 +14,10 @@ export default {}
   background-color: #de436a;
   height: 57px;
   text-align: center;
-  z-index: 5;
-  position: fixed;
-  top: 0;
-  left: 0;
+  // z-index: 5;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
   &__title {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
       sans-serif;

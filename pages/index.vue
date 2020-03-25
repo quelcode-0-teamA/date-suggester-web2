@@ -26,19 +26,19 @@ export default {
 .container {
   margin: 0 auto;
   max-width: 100%;
-  /* min-height: 100vh; */
+  min-height: calc(100vh - 57px);
   display: flex;
   justify-content: center;
-  align-items: center;
   text-align: center;
 }
 .top-page {
-  padding: 140px 20px 0;
   &__button {
+    margin-top: 200px;
     display: block;
-    margin-top: 100px;
   }
   &__image {
+    width: 860px;
+    max-width: 100%;
     display: block;
     position: absolute;
     bottom: 0;
