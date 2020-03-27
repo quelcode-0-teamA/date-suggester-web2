@@ -1,28 +1,23 @@
 <template>
   <div class="container">
-    <!-- <transition name="slide-fade" mode="out-in">
-      <div>
-        <img :src="icons[step].src" :alt="icons[step].alt" />
-        <h2>{{ icons[step].ask }}</h2>
-      </div>
-    </transition> -->
     <transition name="slide-fade-fast" mode="out-in">
       <template v-for="(icon, index) in icons">
         <div v-if="step === index" :key="index">
-          <img :src="icon.src" :alt="icon.alt" />
-          <h2>{{ icon.ask }}</h2>
+          <img class="questions__icon" :src="icon.src" :alt="icon.alt" />
+          <h2 class="questions__ask">{{ icon.ask }}</h2>
+          <form v-if="index === 0" class="questions__form">
+            <select id="birth-year" class="year-select" name="birth-year">
+              <option v-for="year in getYears" :key="year" value="year">
+                {{ year }}
+              </option>
+            </select>
+          </form>
         </div>
       </template>
     </transition>
     <button @click="step += 1">ここだお</button>
 
-    <!-- <p>hogehogefugafuga</p>
-    <select id="birth-year" name="birth-year">
-      <option v-for="year in getYears" :key="year" value="year">
-        {{ year }}
-      </option>
-    </select>
-    <select id="areas" name="areas">
+    <!-- <select id="areas" name="areas">
       <option v-for="area in areas" :key="area.id" value="area">
         {{ area.name }}
       </option>
@@ -91,12 +86,33 @@ export default {
   background-color: #fafafa;
   width: 715px;
   margin: 0 auto;
+  padding: 50px 110px 57px;
   max-width: 100%;
   min-height: calc(100vh - 57px);
   // display: flex;
   // justify-content: center;
   // align-items: center;
   text-align: center;
+}
+.questions {
+  &__icon {
+    margin-bottom: 29px;
+  }
+  &__ask {
+    color: #fe5492;
+  }
+  &__form {
+    width: 272px;
+    padding: 80px 0 84px;
+    margin: 0 auto;
+  }
+}
+.year-select {
+  width: 100%;
+  height: 40px;
+  background-color: white;
+  border-radius: 5px;
+  border-color: #707070;
 }
 .slide-fade-fast-enter {
   opacity: 0;
