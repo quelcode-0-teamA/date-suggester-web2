@@ -7,6 +7,7 @@
           <h2 class="questions__ask">{{ icon.ask }}</h2>
           <form v-if="index === 0" class="questions__form">
             <select id="birth-year" class="year-select" name="birth-year">
+              <font-awesome-icon icon="sort-down"></font-awesome-icon>
               <option v-for="year in getYears" :key="year" value="year">
                 {{ year }}
               </option>
