@@ -6,28 +6,43 @@
           <img class="questions__icon" :src="icon.src" :alt="icon.alt" />
           <h2 class="questions__ask">{{ icon.ask }}</h2>
           <form v-if="index === 0" class="questions__form">
-            <select id="birth-year" class="year-select" name="birth-year">
+            <select class="year-select" name="birth-year">
               <font-awesome-icon icon="sort-down"></font-awesome-icon>
               <option v-for="year in getYears" :key="year" value="year">
                 {{ year }}
               </option>
             </select>
+            <base-button buttonclass="button-step" @click.prevent="step += 1"
+              >次へ</base-button
+            >
+          </form>
+          <form v-if="index === 1" class="questions__form">
+            <select class="year-select" name="areas">
+              <option v-for="area in areas" :key="area.id" value="area">
+                {{ area.name }}
+              </option>
+            </select>
+            <base-button buttonclass="button-step" @click.prevent="step += 1"
+              >次へ</base-button
+            >
           </form>
         </div>
       </template>
     </transition>
-    <button @click="step += 1">ここだお</button>
-
-    <!-- <select id="areas" name="areas">
-      <option v-for="area in areas" :key="area.id" value="area">
-        {{ area.name }}
-      </option>
-    </select> -->
+    <div class="progress">
+      <div class="progress__inner">
+        <div class="progress__inner-0"></div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import BaseButton from '@/components/BaseButton.vue'
 export default {
+  components: {
+    BaseButton
+  },
   asyncData({ $axios }) {
     return $axios.$get('areas').then((response) => {
       return { areas: response }
@@ -109,11 +124,49 @@ export default {
   }
 }
 .year-select {
+  &::-ms-expand {
+    display: none;
+  }
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   width: 100%;
   height: 40px;
   background-color: white;
   border-radius: 5px;
   border-color: #707070;
+  font-size: 100%;
+  padding: 0 10px;
+  margin-bottom: 64px;
+}
+
+.progress {
+  width: 480px;
+  height: 12px;
+  padding: 2px;
+  border-radius: 6px;
+  background-color: #e5e5e5;
+  display: flex;
+  &__inner {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #ff5d89;
+    &-0 {
+      width: 62px;
+    }
+    &-1 {
+      width: 171px;
+    }
+    &-2 {
+      width: 246px;
+    }
+    &-3 {
+      width: 476px;
+    }
+  }
+}
+.bar-enter {
+  width: 62px;
 }
 .slide-fade-fast-enter {
   opacity: 0;

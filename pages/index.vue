@@ -2,7 +2,7 @@
   <div class="container">
     <div class="top-page">
       <nuxt-link class="top-page__button" to="questions">
-        <base-button>早速デートプランを探す</base-button>
+        <button class="button">早速デートプランを探す</button>
       </nuxt-link>
       <img
         class="top-page__image"
@@ -14,10 +14,10 @@
 </template>
 
 <script>
-import BaseButton from '@/components/BaseButton.vue'
+// import BaseButton from '@/components/BaseButton.vue'
 export default {
   components: {
-    BaseButton
+    // BaseButton
   }
 }
 </script>
@@ -45,5 +45,12 @@ export default {
     left: 50%;
     transform: translateX(-50%);
   }
+}
+.-start {
+  width: 308px;
+  max-width: 100%;
+  $height: 52px;
+  height: $height;
+  border-radius: $height / 2;
 }
 </style>

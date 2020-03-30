@@ -12,7 +12,9 @@ export default {
   components: {
     TheHeader
   },
-  data() {}
+  data() {
+    return {}
+  }
 }
 </script>
 <style>

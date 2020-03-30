@@ -3,7 +3,7 @@
     <button
       v-bind="$attrs"
       class="button"
-      :class="buttonClass"
+      :class="buttonclass"
       v-on="$listeners"
     >
       <!-- inheriting event listeners -->
@@ -16,7 +16,7 @@
 export default {
   inheritAttrs: false,
   props: {
-    buttonClass: {
+    buttonclass: {
       type: String,
       default: null
     }
@@ -26,11 +26,6 @@ export default {
 
 <style lang="scss">
 .button {
-  width: 308px;
-  max-width: 100%;
-  $height: 52px;
-  height: $height;
-  border-radius: $height / 2;
   border: 1px white solid;
   color: white;
   // display: inline-flex;
@@ -43,6 +38,18 @@ export default {
   font-weight: bold;
   transition: all 0.2s linear;
   cursor: pointer;
+  width: 308px;
+  max-width: 100%;
+  $height: 52px;
+  height: $height;
+  border-radius: $height / 2;
+}
+.-start {
+  width: 308px;
+  max-width: 100%;
+  $height: 52px;
+  height: $height;
+  border-radius: $height / 2;
 }
 .button:hover {
   background-color: rgba($color: white, $alpha: 0.34);
@@ -50,9 +57,22 @@ export default {
   // transform: scale(1.02);
   // box-shadow: 0 7px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+.button-step {
+  width: 228px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #ffe691;
+  box-shadow: 0 4px #d9c47d;
+  border-radius: 20px;
+  border: none;
+  color: #222;
+  &:hover {
+    background-color: rgba($color: #ffe691, $alpha: 0.8);
+  }
+}
 .button:active {
-  -webkit-transform: scale(1);
-  transform: scale(1);
+  // -webkit-transform: scale(1);
+  transform: translateY(4px);
   box-shadow: none;
 }
 .button:focus {
@@ -67,32 +87,5 @@ export default {
   transform: scale(1);
   box-shadow: none;
   background: #eeeeee;
-}
-.button + .button {
-  margin-left: 1em;
-}
-.button.-fill-gray {
-  background: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
-}
-.button.-size-small {
-  height: 32px;
-}
-.button.-icon-right {
-  text-align: left;
-  padding: 0 20px;
-}
-.button.-icon-right > .icon {
-  margin-left: 10px;
-}
-.button.-icon-left {
-  text-align: right;
-  padding: 0 20px;
-}
-.button.-icon-left > .icon {
-  margin-right: 10px;
-}
-.button.-icon-center {
-  padding: 0 20px;
 }
 </style>
