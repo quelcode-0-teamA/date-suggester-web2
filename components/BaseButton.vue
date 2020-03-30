@@ -19,6 +19,10 @@ export default {
     buttonclass: {
       type: String,
       default: null
+    },
+    value: {
+      type: Number,
+      default: null
     }
   }
 }
@@ -63,9 +67,21 @@ export default {
   border-radius: 20px;
   background-color: #ffe691;
   box-shadow: 0 4px #d9c47d;
-  border-radius: 20px;
   border: none;
   color: #222;
+  &:hover {
+    background-color: rgba($color: #ffe691, $alpha: 0.8);
+  }
+}
+.button-option {
+  width: 332px;
+  height: 56px;
+  border-radius: 28px;
+  background-color: #ffe691;
+  box-shadow: 0 4px #d9c47d;
+  border: none;
+  color: #222;
+  margin-bottom: 21px;
   &:hover {
     background-color: rgba($color: #ffe691, $alpha: 0.8);
   }

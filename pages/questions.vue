@@ -16,7 +16,7 @@
               >次へ</base-button
             >
           </form>
-          <form v-if="index === 1" class="questions__form">
+          <form v-else-if="index === 1" class="questions__form">
             <select class="year-select" name="areas">
               <option v-for="area in areas" :key="area.id" value="area">
                 {{ area.name }}
@@ -24,6 +24,47 @@
             </select>
             <base-button buttonclass="button-step" @click.prevent="step += 1"
               >次へ</base-button
+            >
+          </form>
+          <form v-else-if="index === 2" class="questions__form">
+            <base-button buttonclass="button-option" @click.prevent="step += 1"
+              >ちかく</base-button
+            >
+            <base-button buttonclass="button-option" @click.prevent="step += 1"
+              >とおく</base-button
+            >
+          </form>
+          <form v-else-if="index === 3" class="questions__form">
+            <base-button buttonclass="button-option" @click.prevent="step += 1"
+              >せつやく</base-button
+            >
+            <base-button buttonclass="button-option" @click.prevent="step += 1"
+              >ふつう</base-button
+            >
+            <base-button buttonclass="button-option" @click.prevent="step += 1"
+              >ちょいリッチ</base-button
+            >
+          </form>
+          <form v-else-if="index === 4" class="questions__form">
+            <base-button buttonclass="button-option" @click.prevent="step += 1"
+              >いちにち</base-button
+            >
+            <base-button buttonclass="button-option" @click.prevent="step += 1"
+              >おひる</base-button
+            >
+            <base-button buttonclass="button-option" @click.prevent="step += 1"
+              >よる</base-button
+            >
+          </form>
+          <form v-else-if="index === 5" class="questions__form">
+            <base-button buttonclass="button-option" @click.prevent=""
+              >ごはん</base-button
+            >
+            <base-button buttonclass="button-option" @click.prevent=""
+              >動きたい</base-button
+            >
+            <base-button buttonclass="button-option" @click.prevent=""
+              >まったり</base-button
             >
           </form>
         </div>
@@ -109,6 +150,7 @@ export default {
   // justify-content: center;
   // align-items: center;
   text-align: center;
+  position: relative;
 }
 .questions {
   &__icon {
@@ -144,9 +186,12 @@ export default {
   width: 480px;
   height: 12px;
   padding: 2px;
+  // margin-top: 10px;
   border-radius: 6px;
   background-color: #e5e5e5;
   display: flex;
+  position: absolute;
+  bottom: 60px;
   &__inner {
     height: 8px;
     border-radius: 4px;
