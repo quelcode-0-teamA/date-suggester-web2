@@ -22,49 +22,8 @@
                 {{ area.name }}
               </option>
             </select>
-            <base-button buttonclass="button-step" @click.prevent="step += 1"
+            <base-button buttonclass="button-step" @click.prevent=""
               >次へ</base-button
-            >
-          </form>
-          <form v-else-if="index === 2" class="questions__form">
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
-              >ちかく</base-button
-            >
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
-              >とおく</base-button
-            >
-          </form>
-          <form v-else-if="index === 3" class="questions__form">
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
-              >せつやく</base-button
-            >
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
-              >ふつう</base-button
-            >
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
-              >ちょいリッチ</base-button
-            >
-          </form>
-          <form v-else-if="index === 4" class="questions__form">
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
-              >いちにち</base-button
-            >
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
-              >おひる</base-button
-            >
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
-              >よる</base-button
-            >
-          </form>
-          <form v-else-if="index === 5" class="questions__form">
-            <base-button buttonclass="button-option" @click.prevent=""
-              >ごはん</base-button
-            >
-            <base-button buttonclass="button-option" @click.prevent=""
-              >動きたい</base-button
-            >
-            <base-button buttonclass="button-option" @click.prevent=""
-              >まったり</base-button
             >
           </form>
         </div>
@@ -102,26 +61,6 @@ export default {
           src: require('@/assets/drive.png'),
           alt: 'ドライブのアイコンです',
           ask: 'よく行く場所は？'
-        },
-        {
-          src: require('@/assets/location.png'),
-          alt: '代表的な観光地のアイコンです',
-          ask: 'どこでデートする？'
-        },
-        {
-          src: require('@/assets/money.png'),
-          alt: 'お金のアイコンです',
-          ask: '予算はどのくらい？'
-        },
-        {
-          src: require('@/assets/time.png'),
-          alt: '時計のアイコンです',
-          ask: 'デートの時間帯は？'
-        },
-        {
-          src: require('@/assets/feeling.png'),
-          alt: 'ハートのアイコンです',
-          ask: 'どんなデートの気分？'
         }
       ]
     }
