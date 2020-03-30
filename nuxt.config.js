@@ -42,7 +42,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    'nuxt-fontawesome'
+    'nuxt-fontawesome',
+    ['cookie-universal-nuxt', { parseJSON: false }]
   ],
   fontawesome: {
     imports: [
