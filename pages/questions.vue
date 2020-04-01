@@ -6,9 +6,13 @@
           <img class="questions__icon" :src="icon.src" :alt="icon.alt" />
           <h2 class="questions__ask">{{ icon.ask }}</h2>
           <form v-if="index === 0" class="questions__form">
-            <select class="year-select" name="birth-year">
+            <select
+              v-model="selectedYear"
+              class="year-select"
+              name="birth-year"
+            >
               <font-awesome-icon icon="sort-down"></font-awesome-icon>
-              <option v-for="year in getYears" :key="year" value="year">
+              <option v-for="year in getYears" :key="year" :value="year">
                 {{ year }}
               </option>
             </select>
@@ -17,18 +21,20 @@
             >
           </form>
           <form v-else-if="index === 1" class="questions__form">
-            <select class="year-select" name="areas">
-              <option v-for="area in areas" :key="area.id" value="area">
+            <select v-model="selectedArea" class="year-select" name="areas">
+              <option v-for="area in areas" :key="area.id" :value="area">
                 {{ area.name }}
               </option>
             </select>
-            <base-button buttonclass="button-step" @click.prevent=""
+            <base-button buttonclass="button-step" @click.prevent="setToken"
               >次へ</base-button
             >
           </form>
         </div>
       </template>
     </transition>
+    <!-- <p>{{ selectedYear }}</p>
+    <p>{{ selectedArea.id }}</p> -->
     <div class="progress">
       <div class="progress__inner">
         <div class="progress__inner-0"></div>
@@ -44,13 +50,15 @@ export default {
     BaseButton
   },
   asyncData({ $axios }) {
-    return $axios.$get('areas').then((response) => {
+    return $axios.$get('/v1/areas').then((response) => {
       return { areas: response }
     })
   },
   data() {
     return {
       step: 0,
+      selectedYear: null,
+      selectedArea: {},
       icons: [
         {
           src: require('@/assets/cake.png'),
@@ -73,7 +81,32 @@ export default {
       }
       return years
     }
+  },
+  methods: {
+    setToken() {
+      this.$axios
+        .$post('/v1/temp_user/sign_up', {
+          temp_user: {
+            birth_year: this.selectedYear,
+            area_id: this.selectedArea.id
+          }
+        })
+        .then((response) => {
+          console.log(response)
+          this.$cookies.set('dstoken', response.token, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7
+          })
+          this.$router.push('questions2')
+        })
+    }
   }
+  // middleware({ context, $cookies }) {
+  //   const dateToken = $cookies.get('dstoken')
+  //   if (dateToken) {
+  //     return context.redirect('/questions2')
+  //   }
+  // }
 }
 </script>
 

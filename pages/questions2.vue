@@ -6,43 +6,66 @@
           <img class="questions__icon" :src="icon.src" :alt="icon.alt" />
           <h2 class="questions__ask">{{ icon.ask }}</h2>
           <form v-if="index === 0" class="questions__form">
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
+            <base-button
+              buttonclass="button-option"
+              @click.prevent="updateArea(0)"
               >ちかく</base-button
             >
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
+            <base-button
+              buttonclass="button-option"
+              @click.prevent="updateArea(1)"
               >とおく</base-button
             >
           </form>
           <form v-else-if="index === 1" class="questions__form">
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
+            <base-button
+              buttonclass="button-option"
+              @click.prevent="updateBudget(0)"
               >せつやく</base-button
             >
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
+            <base-button
+              buttonclass="button-option"
+              @click.prevent="updateBudget(1)"
               >ふつう</base-button
             >
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
+            <base-button
+              buttonclass="button-option"
+              @click.prevent="updateBudget(2)"
               >ちょいリッチ</base-button
             >
           </form>
           <form v-else-if="index === 2" class="questions__form">
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
+            <base-button
+              buttonclass="button-option"
+              @click.prevent="updateTime(0)"
               >いちにち</base-button
             >
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
+            <base-button
+              buttonclass="button-option"
+              value="1"
+              @click.prevent="updateTime(1)"
               >おひる</base-button
             >
-            <base-button buttonclass="button-option" @click.prevent="step += 1"
+            <base-button
+              buttonclass="button-option"
+              @click.prevent="updateTime(2)"
               >よる</base-button
             >
           </form>
           <form v-else-if="index === 3" class="questions__form">
-            <base-button buttonclass="button-option" @click.prevent=""
+            <base-button
+              buttonclass="button-option"
+              @click.prevent="updateAnswers(0)"
               >ごはん</base-button
             >
-            <base-button buttonclass="button-option" @click.prevent=""
+            <base-button
+              buttonclass="button-option"
+              @click.prevent="updateAnswers(1)"
               >動きたい</base-button
             >
-            <base-button buttonclass="button-option" @click.prevent=""
+            <base-button
+              buttonclass="button-option"
+              @click.prevent="updateAnswers(2)"
               >まったり</base-button
             >
           </form>
@@ -58,6 +81,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import BaseButton from '@/components/BaseButton.vue'
 export default {
   components: {
@@ -66,6 +90,12 @@ export default {
   data() {
     return {
       step: 0,
+      answers: {
+        date_area: null,
+        date_budget: null,
+        date_time: null,
+        date_type: null
+      },
       icons: [
         {
           src: require('@/assets/location.png'),
@@ -90,7 +120,27 @@ export default {
       ]
     }
   },
-  computed: {}
+  computed: {},
+  methods: {
+    ...mapMutations(['UPDATE_ANSWERS']),
+    updateArea(value) {
+      this.answers.date_area = value
+      this.step++
+    },
+    updateBudget(value) {
+      this.answers.date_budget = value
+      this.step++
+    },
+    updateTime(value) {
+      this.answers.date_time = value
+      this.step++
+    },
+    updateAnswers(value) {
+      this.answers.date_type = value
+      this.UPDATE_ANSWERS(this.answers)
+      this.$router.push('suggest')
+    }
+  }
 }
 </script>
 
