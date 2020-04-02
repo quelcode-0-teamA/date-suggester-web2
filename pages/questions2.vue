@@ -74,7 +74,12 @@
     </transition>
     <div class="progress">
       <div class="progress__inner">
-        <div class="progress__inner-0"></div>
+        <transition name="bar" mode="out-in">
+          <div v-if="step === 0" class="progress__inner-0"></div>
+          <div v-else-if="step === 1" class="progress__inner-1"></div>
+          <div v-else-if="step === 2" class="progress__inner-2"></div>
+          <div v-else class="progress__inner-3"></div>
+        </transition>
       </div>
     </div>
   </div>
@@ -200,9 +205,18 @@ export default {
     }
   }
 }
-.bar-enter {
-  width: 62px;
-}
+// .bar-enter {
+//   opacity: 0;
+//   transform: translateX(-10px);
+// }
+// .bar-enter-active,
+// .bar-leave-active {
+//   transition: all 0.3s ease;
+// }
+// .bar-leave-to {
+//   opacity: 0;
+//   transform: translateX(10px);
+// }
 .slide-fade-fast-enter {
   opacity: 0;
   transform: translateX(10px);
