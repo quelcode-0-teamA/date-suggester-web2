@@ -20,6 +20,6 @@ export const mutations = {
 
 export const getters = {
   qParams(state) {
-    return `/v1/plans/suggest?date_area=${state.answers.date_area}&date_budget=${state.answers.date_budget}&date_time=${state.answers.date_time}&date_type=${state.answers.date_type}`
+    return `date_area=${state.answers.date_area}&date_budget=${state.answers.date_budget}&date_time=${state.answers.date_time}&date_type=${state.answers.date_type}`
   }
 }
