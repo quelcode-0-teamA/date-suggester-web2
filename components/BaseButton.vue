@@ -86,6 +86,20 @@ export default {
     background-color: rgba($color: #ffe691, $alpha: 0.8);
   }
 }
+.button-back {
+  width: 152px;
+  height: 56px;
+  color: #ff5492;
+  background: transparent;
+  border-color: #ff5492;
+  border-radius: 28px;
+}
+.button-pick {
+  width: 160px;
+  height: 56px;
+  background-color: #ff5492;
+  border-radius: 28px;
+}
 .button:active {
   // -webkit-transform: scale(1);
   transform: translateY(4px);

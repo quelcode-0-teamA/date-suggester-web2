@@ -29,12 +29,63 @@
         />
       </div>
     </div>
-    <div class="spots-container"></div>
+    <div class="background">
+      <h3 class="courses">コース詳細</h3>
+      <div class="spots-container">
+        <div class="spots-container__timeline">
+          <div>
+            <font-awesome-icon class="icon" icon="coffee"></font-awesome-icon>
+          </div>
+          <div class="spots-container__dash"></div>
+          <div>
+            <font-awesome-icon class="icon" icon="sun"></font-awesome-icon>
+          </div>
+          <div class="spots-container__dash"></div>
+          <div>
+            <font-awesome-icon class="icon" icon="moon"></font-awesome-icon>
+          </div>
+        </div>
+        <div class="spots-container__spots">
+          <div
+            v-for="(spot, index) in suggest.spots"
+            :key="index"
+            class="spots-container__spot"
+          >
+            <div>
+              <img
+                class="spots-container__spot-photo"
+                :src="spot.thumb"
+                alt="デートスポット毎の写真です"
+              />
+            </div>
+            <div class="spots-container__spot-text">
+              <h4>{{ spot.name }}</h4>
+              <span>
+                <font-awesome-icon icon="yen-sign"></font-awesome-icon>
+                {{ spot.budget }}
+              </span>
+            </div>
+          </div>
+          <div class="button-container">
+            <nuxt-link to="questions2">
+              <base-button buttonclass="button-back">選び直す</base-button>
+            </nuxt-link>
+            <base-button buttonclass="button-pick" @click="addMyPlan"
+              >決定</base-button
+            >
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import BaseButton from '@/components/BaseButton.vue'
 export default {
+  components: {
+    BaseButton
+  },
   asyncData({ store, $axios, app }) {
     const dateToken = app.$cookies.get('dstoken')
     return $axios
@@ -53,6 +104,28 @@ export default {
   },
   data() {
     return {}
+  },
+  methods: {
+    addMyPlan() {
+      this.$axios
+        .$post(
+          'v1/my_plans',
+          {
+            plan: {
+              plan_id: this.suggest.id
+            }
+          },
+          {
+            headers: {
+              Authorization: 'Bearer ' + this.dateToken
+            }
+          }
+        )
+        .then((response) => {
+          console.log(response)
+          this.$router.push('gallery')
+        })
+    }
   }
 }
 </script>
@@ -91,8 +164,60 @@ export default {
     height: 184px;
   }
 }
-
-.spots-container {
+.background {
   background-color: #f5f5f5;
+  min-height: 100vh;
+}
+.courses {
+  width: 720px;
+  padding: 32px 0 15px;
+  margin: 0 auto;
+  font-size: 15px;
+  color: #a2a2a2;
+}
+.spots-container {
+  display: flex;
+  width: 720px;
+  margin: 0 auto;
+  &__timeline {
+    width: 56px;
+    min-height: 100%;
+    display: flex;
+    flex-flow: column;
+    // text-align: center;
+    justify-content: space-between;
+  }
+  &__dash {
+    border: 1px dash #a5a5a5;
+    height: 100%;
+  }
+  &__spots {
+    width: 664px;
+  }
+  &__spot {
+    height: 144px;
+    display: flex;
+    background-color: white;
+    margin-bottom: 42px;
+  }
+  &__spot-photo {
+    width: 208px;
+    height: 144px;
+    object-fit: cover;
+  }
+  &__spot-text {
+    padding: 16px 24px;
+    color: #5d5d5d;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+  }
+}
+.icon {
+  color: #a2a2a2;
+}
+.button-container {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
