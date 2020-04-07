@@ -89,7 +89,7 @@ export default {
   asyncData({ store, $axios, app }) {
     const dateToken = app.$cookies.get('dstoken')
     return $axios
-      .$get(`/v1/plans/suggest?${store.getters.qParams}`, {
+      .$get(`/v1/plans/date-suggest?${store.getters.qParams}`, {
         headers: {
           Authorization: 'Bearer ' + dateToken
         }
@@ -123,7 +123,7 @@ export default {
         )
         .then((response) => {
           console.log(response)
-          this.$router.push('gallery')
+          // this.$router.push('gallery')
         })
     }
   }

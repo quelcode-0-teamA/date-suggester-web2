@@ -58,7 +58,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: `http://datesuggestersta-env.eba-tjsexdfx.ap-northeast-1.elasticbeanstalk.com`,
+    baseURL: `https://api.date-suggester.com`,
     headers: {
       common: { 'Content-Type': 'application/json' }
     }
