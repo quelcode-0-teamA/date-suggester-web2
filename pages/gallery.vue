@@ -7,14 +7,16 @@
         :key="index"
         class="gallery__figure"
       >
-        <img
-          class="gallery__img"
-          :src="item.plan.thumb"
-          alt="ギャラリー内のデートプランの項目タイトルです"
-        />
-        <figcaption class="gallery__figcaption">
-          {{ item.plan.title }}
-        </figcaption>
+        <nuxt-link :to="{ name: 'stored-id', params: { id: item.id } }">
+          <img
+            class="gallery__img"
+            :src="item.plan.thumb"
+            alt="ギャラリー内のデートプランの項目タイトルです"
+          />
+          <figcaption class="gallery__figcaption">
+            {{ item.plan.title }}
+          </figcaption>
+        </nuxt-link>
       </figure>
     </div>
   </div>
@@ -63,6 +65,7 @@ export default {
   &__figure {
     position: relative;
     margin-bottom: 35px;
+    cursor: pointer;
   }
   &__img {
     width: 336px;
