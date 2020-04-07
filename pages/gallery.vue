@@ -4,10 +4,10 @@
     <div class="gallery__list">
       <figure v-for="(item, index) in galleryItems" :key="index">
         <img
-          :src="item.thumb"
+          :src="item.plan.thumb"
           alt="ギャラリー内のデートプランの項目タイトルです"
         />
-        <figcaption>{{ item.title }}</figcaption>
+        <figcaption>{{ item.plan.title }}</figcaption>
       </figure>
     </div>
   </div>
@@ -20,7 +20,7 @@ export default {
     return $axios
       .$get('/v1/my_plans', {
         headers: {
-          Authorizaiton: 'Bearer ' + dateToken
+          Authorization: `Bearer ` + dateToken
         }
       })
       .then((response) => {

@@ -60,10 +60,14 @@
             </div>
             <div class="spots-container__spot-text">
               <h4>{{ spot.name }}</h4>
-              <span>
+              <p>
                 <font-awesome-icon icon="yen-sign"></font-awesome-icon>
                 {{ spot.budget }}
-              </span>
+              </p>
+              <p>
+                <font-awesome-icon icon="link"></font-awesome-icon>
+                {{ spot.url }}
+              </p>
             </div>
           </div>
           <div class="button-container">
@@ -89,7 +93,7 @@ export default {
   asyncData({ store, $axios, app }) {
     const dateToken = app.$cookies.get('dstoken')
     return $axios
-      .$get(`/v1/plans/date-suggest?${store.getters.qParams}`, {
+      .$get(`/v1/plans/suggest?${store.getters.qParams}`, {
         headers: {
           Authorization: 'Bearer ' + dateToken
         }
@@ -109,7 +113,7 @@ export default {
     addMyPlan() {
       this.$axios
         .$post(
-          'v1/my_plans',
+          '/v1/my_plans',
           {
             plan: {
               plan_id: this.suggest.id
@@ -123,7 +127,7 @@ export default {
         )
         .then((response) => {
           console.log(response)
-          // this.$router.push('gallery')
+          this.$router.push('/gallery')
         })
     }
   }
