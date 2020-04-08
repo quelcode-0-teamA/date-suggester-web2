@@ -1,5 +1,6 @@
 <template>
   <div>
+    <popup v-if="showModal" @toggle-modal="showModal = false"></popup>
     <div class="headline-container">
       <div class="headline-container__text">
         <h2 class="headline-container__title">{{ stored.plan.title }}</h2>
@@ -76,7 +77,7 @@
             <nuxt-link to="pages/gallery">
               <base-button buttonclass="button-back">戻る</base-button>
             </nuxt-link>
-            <base-button buttonclass="button-delete" @click="deletePlan"
+            <base-button buttonclass="button-delete" @click="toggelModal"
               >このプランを削除する</base-button
             >
           </div>
@@ -88,9 +89,11 @@
 
 <script>
 import BaseButton from '@/components/BaseButton.vue'
+import Popup from '@/components/Popup.vue'
 export default {
   components: {
-    BaseButton
+    BaseButton,
+    Popup
   },
   asyncData({ app, $axios, params }) {
     const dateToken = app.$cookies.get('dstoken')
@@ -107,6 +110,16 @@ export default {
           dateToken
         }
       })
+  },
+  data() {
+    return {
+      showModal: false
+    }
+  },
+  methods: {
+    toggelModal() {
+      this.showModal = !this.showModal
+    }
   }
 }
 </script>
