@@ -8,64 +8,85 @@
           <form v-if="index === 0" class="questions__form">
             <base-button
               buttonclass="button-option"
-              @click.prevent="updateArea(0)"
+              name="date_area"
+              value="0"
+              @click.prevent="updateAnswers"
               >ちかく</base-button
             >
             <base-button
               buttonclass="button-option"
-              @click.prevent="updateArea(1)"
+              name="date_area"
+              value="1"
+              @click.prevent="updateAnswers"
               >とおく</base-button
             >
           </form>
           <form v-else-if="index === 1" class="questions__form">
             <base-button
               buttonclass="button-option"
-              @click.prevent="updateBudget(0)"
+              name="date_budget"
+              value="0"
+              @click.prevent="updateAnswers"
               >せつやく</base-button
             >
             <base-button
               buttonclass="button-option"
-              @click.prevent="updateBudget(1)"
+              name="date_budget"
+              value="1"
+              @click.prevent="updateAnswers"
               >ふつう</base-button
             >
             <base-button
               buttonclass="button-option"
-              @click.prevent="updateBudget(2)"
+              name="date_budget"
+              value="2"
+              @click.prevent="updateAnswers"
               >ちょいリッチ</base-button
             >
           </form>
           <form v-else-if="index === 2" class="questions__form">
             <base-button
               buttonclass="button-option"
-              @click.prevent="updateTime(0)"
+              name="date_time"
+              value="0"
+              @click.prevent="updateAnswers"
               >いちにち</base-button
             >
             <base-button
               buttonclass="button-option"
+              name="date_time"
               value="1"
-              @click.prevent="updateTime(1)"
+              @click.prevent="updateAnswers"
               >おひる</base-button
             >
             <base-button
               buttonclass="button-option"
-              @click.prevent="updateTime(2)"
+              name="date_time"
+              value="2"
+              @click.prevent="updateAnswers"
               >よる</base-button
             >
           </form>
           <form v-else-if="index === 3" class="questions__form">
             <base-button
               buttonclass="button-option"
-              @click.prevent="updateAnswers(0)"
+              name="date_type"
+              value="0"
+              @click.prevent="updateAnswers"
               >ごはん</base-button
             >
             <base-button
               buttonclass="button-option"
-              @click.prevent="updateAnswers(1)"
+              name="date_type"
+              value="1"
+              @click.prevent="updateAnswers"
               >動きたい</base-button
             >
             <base-button
               buttonclass="button-option"
-              @click.prevent="updateAnswers(2)"
+              name="date_type"
+              value="2"
+              @click.prevent="updateAnswers"
               >まったり</base-button
             >
           </form>
@@ -128,22 +149,17 @@ export default {
   computed: {},
   methods: {
     ...mapMutations(['UPDATE_ANSWERS']),
-    updateArea(value) {
-      this.answers.date_area = value
-      this.step++
-    },
-    updateBudget(value) {
-      this.answers.date_budget = value
-      this.step++
-    },
-    updateTime(value) {
-      this.answers.date_time = value
-      this.step++
-    },
-    updateAnswers(value) {
-      this.answers.date_type = value
-      this.UPDATE_ANSWERS(this.answers)
-      this.$router.push('suggest')
+    updateAnswers(e) {
+      this.answers = {
+        ...this.answers,
+        [e.target.name]: +e.target.value
+      }
+      if (e.target.name === 'date_type') {
+        this.UPDATE_ANSWERS(this.answers)
+        this.$router.push('suggest')
+      } else {
+        this.step++
+      }
     }
   }
 }
