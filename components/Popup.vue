@@ -4,18 +4,15 @@
       <div class="close-button" @click="$emit('toggle-modal')">
         <font-awesome-icon icon="times"></font-awesome-icon>
       </div>
-      <BaseButton>ログイン</BaseButton>
+      <slot></slot>
     </form>
     <div class="black-background"></div>
   </form>
 </template>
 
 <script>
-import BaseButton from '@/components/BaseButton'
 export default {
-  components: {
-    BaseButton
-  },
+  components: {},
   data() {
     return {}
   }

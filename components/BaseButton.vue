@@ -107,6 +107,21 @@ export default {
   background-color: rgba($color: #a2a2a2, $alpha: 0.67);
   color: white;
 }
+.button-popup-back {
+  width: 152px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid #a2a2a2;
+  color: #5d5d5d;
+  padding: 0 32px;
+}
+.button-popup-delete {
+  width: 152px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid #a2a2a2;
+  color: #dd3a3a;
+}
 .button:active {
   // -webkit-transform: scale(1);
   transform: translateY(4px);

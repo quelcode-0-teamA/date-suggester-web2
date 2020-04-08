@@ -1,6 +1,24 @@
 <template>
   <div>
-    <popup v-if="showModal" @toggle-modal="showModal = false"></popup>
+    <popup v-if="showModal" @toggle-modal="showModal = false">
+      <template>
+        <h4 class="popup-text">
+          本当にこのデートプランを一覧から削除しますか？
+        </h4>
+        <div class="popup-buttons">
+          <base-button
+            buttonclass="button-popup-back"
+            @click.prevent="toggleModal"
+            >削除しない</base-button
+          >
+          <base-button
+            buttonclass="button-popup-delete"
+            @click.prevent="deletePlan"
+            >削除する</base-button
+          >
+        </div>
+      </template>
+    </popup>
     <div class="headline-container">
       <div class="headline-container__text">
         <h2 class="headline-container__title">{{ stored.plan.title }}</h2>
@@ -74,10 +92,10 @@
             </div>
           </div>
           <div class="button-container">
-            <nuxt-link to="pages/gallery">
+            <nuxt-link to="../gallery">
               <base-button buttonclass="button-back">戻る</base-button>
             </nuxt-link>
-            <base-button buttonclass="button-delete" @click="toggelModal"
+            <base-button buttonclass="button-delete" @click="toggleModal"
               >このプランを削除する</base-button
             >
           </div>
@@ -117,8 +135,20 @@ export default {
     }
   },
   methods: {
-    toggelModal() {
+    toggleModal() {
       this.showModal = !this.showModal
+    },
+    deletePlan() {
+      this.$axios
+        .$delete(`/v1/my_plans/${this.$route.params.id}`, {
+          headers: {
+            Authorization: 'Bearer ' + this.dateToken
+          }
+        })
+        .then((response) => {
+          console.log(response)
+          this.$router.push('../gallery')
+        })
     }
   }
 }
@@ -213,5 +243,16 @@ export default {
 .button-container {
   display: flex;
   justify-content: space-between;
+}
+.popup-text {
+  text-align: center;
+  color: #5d5d5d;
+  font-size: 15px;
+  width: 548px;
+  margin-bottom: 32px;
+}
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
 }
 </style>
