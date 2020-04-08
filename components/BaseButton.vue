@@ -100,6 +100,13 @@ export default {
   background-color: #ff5492;
   border-radius: 28px;
 }
+.button-delete {
+  padding: 0 32px;
+  height: 56px;
+  border-radius: 28px;
+  background-color: rgba($color: #a2a2a2, $alpha: 0.67);
+  color: white;
+}
 .button:active {
   // -webkit-transform: scale(1);
   transform: translateY(4px);
