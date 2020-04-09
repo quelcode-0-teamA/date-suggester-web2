@@ -41,13 +41,28 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    'nuxt-fontawesome',
+    ['cookie-universal-nuxt', { parseJSON: false }]
   ],
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      }
+    ]
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: `https://api.date-suggester.com`,
+    headers: {
+      common: { 'Content-Type': 'application/json' }
+    }
+  },
   /*
    ** Build configuration
    */

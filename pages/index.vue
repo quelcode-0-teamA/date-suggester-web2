@@ -1,68 +1,56 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        date-suggester-web2
-      </h1>
-      <h2 class="subtitle">
-        My great Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+    <div class="top-page">
+      <nuxt-link class="top-page__button" to="questions">
+        <button class="button">早速デートプランを探す</button>
+      </nuxt-link>
+      <img
+        class="top-page__image"
+        src="../assets/topimage.png"
+        alt="男性が女性を抱き抱えてるイメージです"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
+// import BaseButton from '@/components/BaseButton.vue'
 export default {
   components: {
-    Logo
+    // BaseButton
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .container {
   margin: 0 auto;
-  min-height: 100vh;
+  max-width: 100%;
+  min-height: calc(100vh - 57px);
   display: flex;
   justify-content: center;
-  align-items: center;
   text-align: center;
 }
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+.top-page {
+  &__button {
+    margin-top: 200px;
+    display: block;
+  }
+  &__image {
+    width: 1100px;
+    max-width: 100%;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+.-start {
+  width: 308px;
+  max-width: 100%;
+  $height: 52px;
+  height: $height;
+  border-radius: $height / 2;
 }
 </style>
