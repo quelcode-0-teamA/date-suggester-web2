@@ -122,6 +122,15 @@ export default {
   border: 1px solid #a2a2a2;
   color: #dd3a3a;
 }
+.button-signin {
+  display: block;
+  margin: 120px auto;
+  width: 176px;
+  height: 48px;
+  border: none;
+  border-radius: 24px;
+  background: linear-gradient(to bottom, #ff5f85, #ff8355);
+}
 .button:active {
   // -webkit-transform: scale(1);
   transform: translateY(4px);
