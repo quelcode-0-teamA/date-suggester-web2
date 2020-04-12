@@ -103,14 +103,16 @@ export default {
     }
   }
   &__img-box {
+    width: 100%;
     position: relative;
     height: calc(100vh - 57px);
   }
   &__img {
-    display: block;
-    max-width: 1100px;
+    max-width: 100%;
     position: absolute;
     bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 </style>
