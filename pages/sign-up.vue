@@ -21,7 +21,9 @@
           type="password"
           placeholder="pass確認"
         />
-        <base-button buttonclass="button-signin">sign up</base-button>
+        <base-button buttonclass="button-signin" @click.prevent="log"
+          >sign up</base-button
+        >
       </form>
       <nuxt-link to="sign-in">ログインはこちら</nuxt-link>
     </div>
@@ -51,27 +53,27 @@ export default {
     }
   },
   methods: {
-    signIn() {
+    signUp() {
       this.$axios
         .$post(
-          '/v1/sign_in',
+          '/v1/formal_user/sign_up',
           {
-            user: {
-              email: this.user.email,
-              password: this.user.password
-            }
+            formal_user: this.formal_user
           },
           {
             headers: {
-              'Content-Type': 'application/json'
+              Authorization: 'Bearer ' + this.$cookies.get('dstoken')
             }
           }
         )
         .then((response) => {
           console.log(response)
-          this.$router.push('edit')
+          this.$router.push('gellery')
         })
     }
+    // log() {
+    //   console.log(this.$cookies.get('dstoken'))
+    // }
   }
 }
 </script>

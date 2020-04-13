@@ -93,12 +93,21 @@ export default {
   background: transparent;
   border-color: #ff5492;
   border-radius: 28px;
+  &:hover {
+    color: white;
+    background-color: #ff5492;
+    opacity: 0.67;
+  }
 }
 .button-pick {
   width: 160px;
   height: 56px;
   background-color: #ff5492;
   border-radius: 28px;
+  &:hover {
+    background-color: #ff5492;
+    opacity: 0.67;
+  }
 }
 .button-delete {
   padding: 0 32px;
@@ -106,6 +115,10 @@ export default {
   border-radius: 28px;
   background-color: rgba($color: #a2a2a2, $alpha: 0.67);
   color: white;
+  &:hover {
+    background-color: #222;
+    opacity: 0.67;
+  }
 }
 .button-popup-back {
   width: 152px;
@@ -114,6 +127,10 @@ export default {
   border: 1px solid #a2a2a2;
   color: #5d5d5d;
   padding: 0 32px;
+  &:hover {
+    background-color: #ff5492;
+    color: white;
+  }
 }
 .button-popup-delete {
   width: 152px;
@@ -121,6 +138,10 @@ export default {
   border-radius: 24px;
   border: 1px solid #a2a2a2;
   color: #dd3a3a;
+  &:hover {
+    background-color: rgba($color: #222, $alpha: 0.67);
+    color: white;
+  }
 }
 .button-signin {
   display: block;
@@ -130,27 +151,28 @@ export default {
   border: none;
   border-radius: 24px;
   background: linear-gradient(to bottom, #ff5f85, #ff8355);
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 .button-edit {
   width: 176px;
   height: 40px;
 }
+.button-gallery {
+  max-width: 308px;
+  height: 58px;
+  border-radius: 29px;
+  background-color: #ff5492;
+  margin-bottom: 70px;
+  &:hover {
+    background-color: #ff5492;
+    opacity: 0.67;
+  }
+}
 .button:active {
   // -webkit-transform: scale(1);
   transform: translateY(4px);
   box-shadow: none;
-}
-.button:focus {
-  outline: 0;
-}
-.button.-fill-gradient {
-  background: linear-gradient(to right, #16c0b0, #84cf6a);
-  color: #ffffff;
-}
-.button:disabled {
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  box-shadow: none;
-  background: #eeeeee;
 }
 </style>

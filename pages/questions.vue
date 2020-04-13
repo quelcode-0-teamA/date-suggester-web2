@@ -11,7 +11,6 @@
               class="year-select"
               name="birth-year"
             >
-              <font-awesome-icon icon="sort-down"></font-awesome-icon>
               <option v-for="year in getYears" :key="year" :value="year">
                 {{ year }}
               </option>
@@ -152,6 +151,19 @@ export default {
   font-size: 100%;
   padding: 0 10px;
   margin-bottom: 64px;
+  // position: relative;
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 50%;
+  //   right: 10px;
+  //   display: block;
+  //   width: 0;
+  //   height: 0;
+  //   margin: -2px 0 0 0;
+  //   border: 5px solid transparent;
+  //   border-top: 7px solid #f69;
+  // }
 }
 
 .progress {

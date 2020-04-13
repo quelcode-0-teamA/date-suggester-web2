@@ -1,13 +1,15 @@
 <template>
   <div class="header">
-    <h1 class="header__title">
+    <h1 class="header__title" @click="$router.push('/')">
       Date Suggester
     </h1>
-    <nuxt-link class="header__sign-in" to="sign-in">
-      <div class="avatar">
+    <div class="avatar">
+      <nuxt-link class="nav-link" to="sign-in">サインイン</nuxt-link>
+      <nuxt-link class="nav-link" to="sign-up">新規登録</nuxt-link>
+      <nuxt-link class="header__sign-in" to="sign-in">
         <img src="@/assets/avatar.png" alt="あなたのアバターです" />
-      </div>
-    </nuxt-link>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -30,6 +32,7 @@ export default {
   height: 57px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  cursor: pointer;
   &__title {
     grid-column: 2 / 3;
     text-align: center;
@@ -46,7 +49,16 @@ export default {
   }
 }
 .avatar {
-  margin: 16px 32px auto;
+  margin: 12px 32px auto;
   text-align: right;
+}
+.nav-link {
+  color: white;
+  font-size: 13px;
+  display: inline-block;
+  vertical-align: middle;
+  height: 57px;
+  line-height: 42px;
+  margin-right: 8px;
 }
 </style>

@@ -19,11 +19,18 @@
         </nuxt-link>
       </figure>
     </div>
+    <base-button
+      buttonclass="button-gallery"
+      @click="$router.push('questions2')"
+      >デートプランを探す</base-button
+    >
   </div>
 </template>
 
 <script>
+import BaseButton from '~/components/BaseButton.vue'
 export default {
+  components: { BaseButton },
   asyncData({ app, $axios }) {
     const dateToken = app.$cookies.get('dstoken')
     return $axios
@@ -47,6 +54,7 @@ export default {
 .gallery {
   background-color: #fff;
   min-height: calc(100vh - 57px);
+  text-align: center;
   &__title {
     display: flex;
     justify-content: center;
@@ -84,5 +92,16 @@ export default {
     align-items: center;
     justify-content: center;
   }
+  &__topimage {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.37;
+  }
+}
+.empty-list {
+  text-align: center;
+  position: relative;
 }
 </style>

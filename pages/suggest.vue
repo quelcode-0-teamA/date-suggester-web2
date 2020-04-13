@@ -36,11 +36,11 @@
           <div>
             <font-awesome-icon class="icon" icon="coffee"></font-awesome-icon>
           </div>
-          <div class="spots-container__dash"></div>
+          <div class="vertical-line"></div>
           <div>
             <font-awesome-icon class="icon" icon="sun"></font-awesome-icon>
           </div>
-          <div class="spots-container__dash"></div>
+          <div class="vertical-line"></div>
           <div>
             <font-awesome-icon class="icon" icon="moon"></font-awesome-icon>
           </div>
@@ -72,15 +72,15 @@
               </p>
             </div>
           </div>
-          <div class="button-container">
-            <nuxt-link to="questions2">
-              <base-button buttonclass="button-back">選び直す</base-button>
-            </nuxt-link>
-            <base-button buttonclass="button-pick" @click="addMyPlan"
-              >決定</base-button
-            >
-          </div>
         </div>
+      </div>
+      <div class="button-container">
+        <nuxt-link to="questions2">
+          <base-button buttonclass="button-back">選び直す</base-button>
+        </nuxt-link>
+        <base-button buttonclass="button-pick" @click="addMyPlan"
+          >決定</base-button
+        >
       </div>
     </div>
   </div>
@@ -143,7 +143,6 @@ export default {
   display: flex;
   margin: 0 auto;
   padding: 32px 0 24px;
-  position: relative;
   &__text {
     color: white;
     padding-right: 70px;
@@ -190,7 +189,6 @@ export default {
     min-height: 100%;
     display: flex;
     flex-flow: column;
-    // text-align: center;
     justify-content: space-between;
   }
   &__dash {
@@ -204,7 +202,9 @@ export default {
     height: 144px;
     display: flex;
     background-color: white;
-    margin-bottom: 42px;
+  }
+  &__spot + &__spot {
+    margin-top: 42px;
   }
   &__spot-photo {
     width: 208px;
@@ -223,7 +223,14 @@ export default {
   color: #a2a2a2;
 }
 .button-container {
+  width: 720px;
   display: flex;
   justify-content: space-between;
+  margin: 62px auto 32px;
+}
+.vertical-line {
+  border-left: 1px dotted #a2a2a2;
+  height: 1000%;
+  margin-left: 8px;
 }
 </style>
