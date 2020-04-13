@@ -15,7 +15,7 @@
           type="password"
           placeholder="pass"
         />
-        <base-button class="button-signin">sign in</base-button>
+        <base-button buttonclass="button-signin">sign in</base-button>
       </form>
     </div>
     <div class="signin__img-box">
@@ -61,7 +61,7 @@ export default {
         )
         .then((response) => {
           console.log(response)
-          this.$routers.push('sign-up')
+          this.$routers.push('edit')
         })
     }
   }

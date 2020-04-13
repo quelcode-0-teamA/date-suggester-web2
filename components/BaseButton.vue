@@ -131,6 +131,10 @@ export default {
   border-radius: 24px;
   background: linear-gradient(to bottom, #ff5f85, #ff8355);
 }
+.button-edit {
+  width: 176px;
+  height: 40px;
+}
 .button:active {
   // -webkit-transform: scale(1);
   transform: translateY(4px);
