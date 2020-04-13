@@ -1,23 +1,29 @@
 <template>
   <div class="signin">
     <div class="signin__form-side">
-      <h2 class="signin__welcome">Welcome Back!</h2>
+      <h2 class="signin__welcome">Welcome!</h2>
       <form class="signin__form">
         <input
-          v-model="user.email"
+          v-model="formal_user.email"
           class="signin__input"
           type="email"
           placeholder="mail"
         />
         <input
-          v-model="user.password"
+          v-model="formal_user.password"
           class="signin__input"
           type="password"
           placeholder="pass"
         />
-        <base-button buttonclass="button-signin">sign in</base-button>
+        <input
+          v-model="formal_user.password_confirmation"
+          class="signin__input"
+          type="password"
+          placeholder="pass確認"
+        />
+        <base-button buttonclass="button-signin">sign up</base-button>
       </form>
-      <nuxt-link to="sign-up">新規登録はこちら</nuxt-link>
+      <nuxt-link to="sign-in">ログインはこちら</nuxt-link>
     </div>
     <div class="signin__img-box">
       <img
@@ -37,9 +43,10 @@ export default {
   },
   data() {
     return {
-      user: {
+      formal_user: {
         email: '',
-        password: ''
+        password: '',
+        password_confirmation: ''
       }
     }
   },

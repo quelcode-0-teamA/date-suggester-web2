@@ -1,42 +1,52 @@
 <template>
   <div class="container">
-    <!-- <div class="edit">
-      <h2 class="edit__text">あなたの名前は？</h2>
-      <form>
-        <input v-model="user.name" class="name-input edit__input" type="text" />
-      </form>
-    </div>
-    <div class="edit">
-      <h2 class="edit__text">あなたのメールアドレスは？</h2>
-      <form>
-        <input
-          v-model="user.email"
-          class="name-input edit__input"
-          type="email"
-        />
-      </form>
-    </div> -->
-    <!-- <div class="edit">
-      <h2 class="edit__text">あなたの生まれた年は？</h2>
-      <form class="edit__input">
-        <select v-model="user.birth_year" class="year-select" name="birth-year">
-          <font-awesome-icon icon="sort-down"></font-awesome-icon>
-          <option v-for="year in getYears" :key="year" :value="year">
-            {{ year }}
-          </option>
-        </select>
-      </form>
-    </div> -->
-    <div class="edit">
-      <h2 class="edit__text">よく行く場所はどこですか？</h2>
-      <form class="edit__input">
-        <select v-model="user.area_id" class="year-select" name="areas">
-          <option v-for="area in areas" :key="area.id" :value="area">
-            {{ area.name }}
-          </option>
-        </select>
-      </form>
-    </div>
+    <transition name="slide-fade" mode="out-in">
+      <div v-if="step === 1" class="edit">
+        <h2 class="edit__text">あなたの名前は？</h2>
+        <form>
+          <input
+            v-model="user.name"
+            class="name-input edit__input"
+            type="text"
+          />
+        </form>
+      </div>
+      <div v-else-if="step === 2" class="edit">
+        <h2 class="edit__text">あなたのメールアドレスは？</h2>
+        <form>
+          <input
+            v-model="user.email"
+            class="name-input edit__input"
+            type="email"
+          />
+        </form>
+      </div>
+      <div v-else-if="step === 3" class="edit">
+        <h2 class="edit__text">あなたの生まれた年は？</h2>
+        <form class="edit__input">
+          <select
+            v-model="user.birth_year"
+            class="year-select"
+            name="birth-year"
+          >
+            <font-awesome-icon icon="sort-down"></font-awesome-icon>
+            <option v-for="year in getYears" :key="year" :value="year">
+              {{ year }}
+            </option>
+          </select>
+        </form>
+      </div>
+      <div v-else class="edit">
+        <h2 class="edit__text">よく行く場所はどこですか？</h2>
+        <form class="edit__input">
+          <select v-model="user.area_id" class="year-select" name="areas">
+            <option v-for="area in areas" :key="area.id" :value="area">
+              {{ area.name }}
+            </option>
+          </select>
+        </form>
+      </div>
+    </transition>
     <base-button buttonclass="button-edit" @click="updateAnswers"
       >next</base-button
     >
@@ -150,5 +160,17 @@ export default {
   font-size: 100%;
   padding: 0 10px;
   margin-bottom: 64px;
+}
+.slide-fade-fast-enter {
+  opacity: 0;
+  transform: translateX(10px);
+}
+.slide-fade-fast-enter-active,
+.slide-fade-fast-leave-active {
+  transition: all 0.2s ease;
+}
+.slide-fade-fast-leave-to {
+  opacity: 0;
+  transform: translateX(-10px);
 }
 </style>

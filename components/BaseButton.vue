@@ -124,7 +124,7 @@ export default {
 }
 .button-signin {
   display: block;
-  margin: 120px auto;
+  margin: 120px auto 0;
   width: 176px;
   height: 48px;
   border: none;
