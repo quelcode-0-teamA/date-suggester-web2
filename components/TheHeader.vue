@@ -4,8 +4,9 @@
       Date Suggester
     </h1>
     <div class="avatar">
+      <nuxt-link class="nav-link" to="gallery">ギャラリー</nuxt-link>
       <nuxt-link class="nav-link" to="sign-in">サインイン</nuxt-link>
-      <nuxt-link class="nav-link" to="sign-up">新規登録</nuxt-link>
+      <nuxt-link class="nav-link nav-signup" to="sign-up">新規登録</nuxt-link>
       <nuxt-link class="header__sign-in" to="sign-in">
         <img src="@/assets/avatar.png" alt="あなたのアバターです" />
       </nuxt-link>
@@ -60,5 +61,9 @@ export default {
   height: 57px;
   line-height: 42px;
   margin-right: 8px;
+}
+.nav-signup {
+  color: white;
+  // border-bottom: 1px solid blue;
 }
 </style>

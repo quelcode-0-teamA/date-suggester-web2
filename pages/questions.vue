@@ -99,13 +99,13 @@ export default {
           this.$router.push('questions2')
         })
     }
+  },
+  middleware({ app }) {
+    const dateToken = app.$cookies.get('dstoken')
+    if (dateToken) {
+      return app.context.redirect('/questions2')
+    }
   }
-  // middleware({ context, $cookies }) {
-  //   const dateToken = $cookies.get('dstoken')
-  //   if (dateToken) {
-  //     return context.redirect('/questions2')
-  //   }
-  // }
 }
 </script>
 

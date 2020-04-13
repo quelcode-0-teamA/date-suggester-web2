@@ -173,9 +173,6 @@ export default {
   padding: 50px 110px 57px;
   max-width: 100%;
   min-height: calc(100vh - 57px);
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
   text-align: center;
   position: relative;
 }
@@ -197,7 +194,6 @@ export default {
   width: 480px;
   height: 12px;
   padding: 2px;
-  // margin-top: 10px;
   border-radius: 6px;
   background-color: #e5e5e5;
   display: flex;
@@ -221,18 +217,6 @@ export default {
     }
   }
 }
-// .bar-enter {
-//   opacity: 0;
-//   transform: translateX(-10px);
-// }
-// .bar-enter-active,
-// .bar-leave-active {
-//   transition: all 0.3s ease;
-// }
-// .bar-leave-to {
-//   opacity: 0;
-//   transform: translateX(10px);
-// }
 .slide-fade-fast-enter {
   opacity: 0;
   transform: translateX(10px);
