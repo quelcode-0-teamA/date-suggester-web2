@@ -21,11 +21,11 @@
           type="password"
           placeholder="pass確認"
         />
-        <base-button buttonclass="button-signin" @click.prevent="log"
+        <base-button buttonclass="button-signin" @click.prevent="signUp"
           >sign up</base-button
         >
       </form>
-      <nuxt-link to="sign-in">ログインはこちら</nuxt-link>
+      <nuxt-link to="sign-in">サインインはこちら</nuxt-link>
     </div>
     <div class="signin__img-box">
       <img
@@ -68,7 +68,7 @@ export default {
         )
         .then((response) => {
           console.log(response)
-          this.$router.push('gellery')
+          this.$router.push('gallery')
         })
     }
     // log() {

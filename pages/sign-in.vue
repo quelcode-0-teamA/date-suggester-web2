@@ -15,7 +15,9 @@
           type="password"
           placeholder="pass"
         />
-        <base-button buttonclass="button-signin">sign in</base-button>
+        <base-button buttonclass="button-signin" @click="signIn"
+          >sign in</base-button
+        >
       </form>
       <nuxt-link to="sign-up">新規登録はこちら</nuxt-link>
     </div>
@@ -62,7 +64,7 @@ export default {
         )
         .then((response) => {
           console.log(response)
-          this.$router.push('edit')
+          this.$router.push('gallery')
         })
     }
   }
