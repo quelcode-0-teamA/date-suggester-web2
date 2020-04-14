@@ -4,11 +4,6 @@
       <nuxt-link class="top-page__button" to="questions">
         <button class="button">早速デートプランを探す</button>
       </nuxt-link>
-      <img
-        class="top-page__image"
-        src="../assets/topimage.png"
-        alt="男性が女性を抱き抱えてるイメージです"
-      />
     </div>
   </div>
 </template>
@@ -32,18 +27,14 @@ export default {
   text-align: center;
 }
 .top-page {
+  width: 770px;
+  text-align: center;
+  background-image: url('../assets/topimage.svg');
+  background-repeat: no-repeat;
+  background-position: bottom;
   &__button {
     margin-top: 200px;
-    display: block;
-  }
-  &__image {
-    width: 1100px;
-    max-width: 100%;
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    display: inline-block;
   }
 }
 .-start {

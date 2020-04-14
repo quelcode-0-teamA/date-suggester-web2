@@ -4,7 +4,8 @@
       Date Suggester
     </h1>
     <div class="avatar">
-      <nuxt-link class="nav-link" to="gallery">ギャラリー</nuxt-link>
+      <nuxt-link class="nav-link" to="questions">プランを探す</nuxt-link>
+      <nuxt-link class="nav-link" to="gallery">保存したプラン</nuxt-link>
       <nuxt-link class="nav-link" to="sign-in">サインイン</nuxt-link>
       <nuxt-link class="nav-link nav-signup" to="sign-up">新規登録</nuxt-link>
       <div class="header__sign-in dropdown" to="sign-in">
