@@ -66,7 +66,7 @@
               </p>
               <p>
                 <font-awesome-icon icon="link"></font-awesome-icon>
-                <a href="spot.url">
+                <a :href="spot.url">
                   {{ spot.url }}
                 </a>
               </p>
