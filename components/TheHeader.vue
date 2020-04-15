@@ -3,11 +3,15 @@
     <h1 class="header__title" @click="$router.push('/')">
       Date Suggester
     </h1>
-    <div class="nav-links">
+    <div v-if="usedOnce" class="nav-links">
       <nuxt-link class="nav-link" to="questions">プランを探す</nuxt-link>
       <nuxt-link class="nav-link" to="gallery">保存したプラン</nuxt-link>
-      <nuxt-link class="nav-link" to="sign-in">サインイン</nuxt-link>
-      <nuxt-link class="nav-link nav-signup" to="sign-up">新規登録</nuxt-link>
+      <nuxt-link v-if="!loggedIn" class="nav-link" to="sign-in"
+        >サインイン</nuxt-link
+      >
+      <nuxt-link v-if="!loggedIn" class="nav-link nav-signup" to="sign-up"
+        >新規登録</nuxt-link
+      >
       <div class="header__sign-in dropdown" to="sign-in">
         <img
           class="avatar"
@@ -24,7 +28,9 @@
           <li class="dropdown__edit" @click="$router.push('edit')">
             登録情報の編集
           </li>
-          <li class="dropdown__signout" @click="signOut">サインアウト</li>
+          <li v-if="loggedIn" class="dropdown__signout" @click="signOut">
+            サインアウト
+          </li>
         </ul>
       </div>
     </div>
@@ -43,11 +49,31 @@ export default {
         id: null,
         avatar: null,
         name: '名もなき恋の達人'
-      }
+      },
+      loggedIn: false,
+      temp_user: false
       // avatar: {
       //   type: String,
       //   default: require('@/assets/avatar.png')
       // }
+    }
+  },
+  computed: {
+    usedOnce() {
+      if (this.loggedIn || this.temp_user) {
+        return true
+      } else {
+        return false
+      }
+    }
+  },
+  mounted() {
+    const dateToken = this.$cookies.get('dstoken')
+    const email = this.cookies.get('email')
+    if (dateToken && email) {
+      this.loggedIn = true
+    } else if (dateToken && !email) {
+      this.temp_user = true
     }
   },
   methods: {

@@ -96,6 +96,10 @@ export default {
             path: '/',
             maxAge: 60 * 60 * 24 * 7
           })
+          this.$cookeis.set('email', response.email, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7
+          })
           this.$router.push('questions2')
         })
     }
