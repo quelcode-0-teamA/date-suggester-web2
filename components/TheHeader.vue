@@ -3,17 +3,28 @@
     <h1 class="header__title" @click="$router.push('/')">
       Date Suggester
     </h1>
-    <div class="avatar">
+    <div class="nav-links">
       <nuxt-link class="nav-link" to="questions">プランを探す</nuxt-link>
       <nuxt-link class="nav-link" to="gallery">保存したプラン</nuxt-link>
       <nuxt-link class="nav-link" to="sign-in">サインイン</nuxt-link>
       <nuxt-link class="nav-link nav-signup" to="sign-up">新規登録</nuxt-link>
       <div class="header__sign-in dropdown" to="sign-in">
-        <img src="@/assets/avatar.png" alt="あなたのアバターです" />
+        <img
+          class="avatar"
+          src="@/assets/avatar.png"
+          alt="あなたのアバターです"
+        />
         <ul class="dropdown__content">
-          <li>{{ user.name }}さん</li>
-          <li @click="$router.push('edit')">登録情報の編集</li>
-          <li @click="signOut">サインアウト</li>
+          <li dropdown__name>
+            {{ user.name }}
+            <small>
+              さん
+            </small>
+          </li>
+          <li class="dropdown__edit" @click="$router.push('edit')">
+            登録情報の編集
+          </li>
+          <li class="dropdown__signout" @click="signOut">サインアウト</li>
         </ul>
       </div>
     </div>
@@ -62,8 +73,8 @@ export default {
   height: 57px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  cursor: pointer;
   &__title {
+    cursor: pointer;
     grid-column: 2 / 3;
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
@@ -79,9 +90,12 @@ export default {
     display: inline-block;
   }
 }
-.avatar {
-  margin: 12px 32px auto;
-  text-align: right;
+.nav-links {
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
 }
 .nav-link {
   color: white;
@@ -89,34 +103,66 @@ export default {
   display: inline-block;
   vertical-align: middle;
   height: 57px;
-  line-height: 42px;
-  margin-right: 8px;
+  line-height: 57px;
+  padding: 0 8px 0;
+  &:hover {
+    background-color: rgba(white, 0.3);
+  }
 }
 .nav-signup {
   color: white;
+  // font-weight: bold;
   // border-bottom: 1px solid blue;
 }
 .dropdown {
-  position: relative;
+  height: 57px;
+  margin: 0 16px 0 8px;
   text-align: center;
+  vertical-align: middle;
+  display: flex;
+  cursor: pointer;
   &__content {
-    // display: none;
+    display: none;
     position: absolute;
-    top: 44px;
-    right: -32px;
+    top: 57px;
+    right: 0px;
     background-color: #eee;
-    border-radius: 5px;
+    // border-radius: 5px;
     min-width: 160px;
     box-shadow: 0 8px 16px 0 rgba($color: #000000, $alpha: 0.2);
     z-index: 1;
     list-style: none;
     padding-left: 0;
   }
+  &:hover &__content {
+    display: block;
+  }
+  &__content:hover {
+    display: block;
+  }
   &__content > li {
     padding: 5px 10px;
+    cursor: pointer;
+  }
+  &__content > li:hover {
+    background-color: rgba($color: white, $alpha: 0.67);
   }
   &__content > li + li {
     border-top: 1px solid rgba($color: #707070, $alpha: 1);
   }
+  &__name {
+    font-size: 14px;
+  }
+  &__edit {
+    font-size: 13px;
+  }
+  &__signout {
+    font-size: 11px;
+    color: #de436a;
+  }
+}
+.avatar {
+  display: inline-block;
+  align-self: center;
 }
 </style>
