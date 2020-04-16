@@ -3,15 +3,17 @@
     <h1 class="header__title" @click="$router.push('/')">
       Date Suggester
     </h1>
-    <div v-if="usedOnce" class="nav-links">
-      <nuxt-link class="nav-link" to="questions">プランを探す</nuxt-link>
-      <nuxt-link class="nav-link" to="gallery">保存したプラン</nuxt-link>
-      <nuxt-link v-if="!loggedIn" class="nav-link" to="sign-in"
-        >サインイン</nuxt-link
-      >
-      <nuxt-link v-if="!loggedIn" class="nav-link nav-signup" to="sign-up"
-        >新規登録</nuxt-link
-      >
+    <div v-if="login.dateToken" class="nav-links">
+      <nav>
+        <nuxt-link class="nav-link" to="questions">プランを探す</nuxt-link>
+        <nuxt-link class="nav-link" to="gallery">保存したプラン</nuxt-link>
+        <nuxt-link v-if="!loggedIn" class="nav-link" to="sign-in"
+          >サインイン</nuxt-link
+        >
+        <nuxt-link v-if="!loggedIn" class="nav-link nav-signup" to="sign-up"
+          >新規登録</nuxt-link
+        >
+      </nav>
       <div class="header__sign-in dropdown" to="sign-in">
         <img
           class="avatar"
@@ -50,8 +52,10 @@ export default {
         avatar: null,
         name: '名もなき恋の達人'
       },
-      loggedIn: false,
-      temp_user: false
+      login: {
+        dateToken: '',
+        email: ''
+      }
       // avatar: {
       //   type: String,
       //   default: require('@/assets/avatar.png')
@@ -59,8 +63,15 @@ export default {
     }
   },
   computed: {
-    usedOnce() {
-      if (this.loggedIn || this.temp_user) {
+    loggedIn() {
+      if (this.login.dateToken && this.login.email) {
+        return true
+      } else {
+        return false
+      }
+    },
+    tempLogin() {
+      if (this.login.dateToken && this.login.email === '') {
         return true
       } else {
         return false
@@ -68,13 +79,8 @@ export default {
     }
   },
   mounted() {
-    const dateToken = this.$cookies.get('dstoken')
-    const email = this.cookies.get('email')
-    if (dateToken && email) {
-      this.loggedIn = true
-    } else if (dateToken && !email) {
-      this.temp_user = true
-    }
+    this.login.dateToken = this.$cookies.get('dstoken')
+    this.login.email = this.$cookies.get('email')
   },
   methods: {
     signOut() {
@@ -168,13 +174,13 @@ export default {
   }
   &__content > li {
     padding: 5px 10px;
-    cursor: pointer;
   }
   &__content > li:hover {
     background-color: rgba($color: white, $alpha: 0.67);
   }
   &__content > li + li {
     border-top: 1px solid rgba($color: #707070, $alpha: 1);
+    cursor: pointer;
   }
   &__name {
     font-size: 14px;

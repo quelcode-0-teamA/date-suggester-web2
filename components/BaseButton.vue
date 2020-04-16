@@ -47,6 +47,14 @@ export default {
   $height: 52px;
   height: $height;
   border-radius: $height / 2;
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+  }
+  &::-moz-focus-inner {
+    border: none;
+  }
 }
 .-start {
   width: 308px;
