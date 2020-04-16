@@ -33,6 +33,7 @@
           <li v-if="loggedIn" class="dropdown__signout" @click="signOut">
             サインアウト
           </li>
+          <li @click="log"></li>
         </ul>
       </div>
     </div>
@@ -48,13 +49,13 @@ export default {
   data() {
     return {
       user: {
-        id: null,
         avatar: null,
         name: '名もなき恋の達人'
       },
       login: {
+        id: '',
         dateToken: '',
-        email: ''
+        email: 'null'
       }
       // avatar: {
       //   type: String,
@@ -64,14 +65,7 @@ export default {
   },
   computed: {
     loggedIn() {
-      if (this.login.dateToken && this.login.email) {
-        return true
-      } else {
-        return false
-      }
-    },
-    tempLogin() {
-      if (this.login.dateToken && this.login.email === '') {
+      if (this.login.dateToken && this.login.email !== 'null') {
         return true
       } else {
         return false
@@ -85,7 +79,7 @@ export default {
   methods: {
     signOut() {
       this.$axios
-        .$delete(`/v1/users/${this.user.id}`, {
+        .$delete(`/v1/users/${this.login.id}`, {
           headers: {
             Authorization: 'Bearer ' + this.$cookies.get('dstoken')
           }
@@ -94,6 +88,12 @@ export default {
           console.log(response)
           this.$router.push('/')
         })
+    },
+    log() {
+      console.log(this.login)
+      console.log(this.login.dateToken !== '' && this.login.email !== 'null')
+      console.log(typeof this.login.email)
+      console.log('asdf' && 'asdga')
     }
   }
 }

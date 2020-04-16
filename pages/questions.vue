@@ -92,6 +92,10 @@ export default {
         })
         .then((response) => {
           console.log(response)
+          this.$cookies.set('dsid', response.id, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7
+          })
           this.$cookies.set('dstoken', response.token, {
             path: '/',
             maxAge: 60 * 60 * 24 * 7
