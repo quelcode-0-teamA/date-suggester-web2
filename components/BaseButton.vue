@@ -78,7 +78,7 @@ export default {
   border: none;
   color: #222;
   &:hover {
-    background-color: rgba($color: #ffe691, $alpha: 0.8);
+    background-color: #ffce00;
   }
 }
 .button-option {
@@ -91,19 +91,19 @@ export default {
   color: #222;
   margin-bottom: 21px;
   &:hover {
-    background-color: rgba($color: #ffe691, $alpha: 0.8);
+    background-color: #ffce00;
   }
 }
 .button-back {
   width: 152px;
   height: 56px;
-  color: #ff5492;
+  color: #a2a2a2;
   background: transparent;
-  border-color: #ff5492;
+  border-color: #a2a2a2;
   border-radius: 28px;
   &:hover {
     color: white;
-    background-color: #ff5492;
+    background-color: #a2a2a2;
     opacity: 0.67;
   }
 }

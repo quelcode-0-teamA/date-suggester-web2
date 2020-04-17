@@ -19,11 +19,11 @@
         </nuxt-link>
       </figure>
     </div>
-    <base-button
+    <!-- <base-button
       buttonclass="button-gallery"
       @click="$router.push('questions2')"
       >デートプランを探す</base-button
-    >
+    > -->
     <div v-once id="snackbar">
       ログインをしないとプランは一週間しか保存されません
     </div>
@@ -31,9 +31,7 @@
 </template>
 
 <script>
-import BaseButton from '~/components/BaseButton.vue'
 export default {
-  components: { BaseButton },
   asyncData({ app, $axios }) {
     const dateToken = app.$cookies.get('dstoken')
     return $axios

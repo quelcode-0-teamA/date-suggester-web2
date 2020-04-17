@@ -57,11 +57,11 @@
           <div>
             <font-awesome-icon class="icon" icon="coffee"></font-awesome-icon>
           </div>
-          <div class="spots-container__dash"></div>
+          <div class="vertical-line"></div>
           <div>
             <font-awesome-icon class="icon" icon="sun"></font-awesome-icon>
           </div>
-          <div class="spots-container__dash"></div>
+          <div class="vertical-line"></div>
           <div>
             <font-awesome-icon class="icon" icon="moon"></font-awesome-icon>
           </div>
@@ -91,15 +91,15 @@
               </p>
             </div>
           </div>
-          <div class="button-container">
-            <nuxt-link to="../gallery">
-              <base-button buttonclass="button-back">戻る</base-button>
-            </nuxt-link>
-            <base-button buttonclass="button-delete" @click="toggleModal"
-              >このプランを削除する</base-button
-            >
-          </div>
         </div>
+      </div>
+      <div class="button-container">
+        <nuxt-link to="../gallery">
+          <base-button buttonclass="button-back">戻る</base-button>
+        </nuxt-link>
+        <base-button buttonclass="button-delete" @click="toggleModal"
+          >このプランを削除する</base-button
+        >
       </div>
     </div>
   </div>
@@ -222,7 +222,9 @@ export default {
     height: 144px;
     display: flex;
     background-color: white;
-    margin-bottom: 42px;
+  }
+  &__spot + &__spot {
+    margin-top: 42px;
   }
   &__spot-photo {
     width: 208px;
@@ -240,9 +242,16 @@ export default {
 .icon {
   color: #a2a2a2;
 }
+.vertical-line {
+  border-left: 1px dotted #a2a2a2;
+  height: 1000%;
+  margin-left: 8px;
+}
 .button-container {
+  width: 720px;
   display: flex;
   justify-content: space-between;
+  margin: 62px auto 32px;
 }
 .popup-text {
   text-align: center;

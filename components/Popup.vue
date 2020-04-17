@@ -6,7 +6,7 @@
       </div>
       <slot></slot>
     </form>
-    <div class="black-background"></div>
+    <div class="black-background" @click="$emit('toggle-modal')"></div>
   </form>
 </template>
 

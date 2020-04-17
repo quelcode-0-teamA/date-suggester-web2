@@ -33,7 +33,7 @@
           <li v-if="loggedIn" class="dropdown__signout" @click="signOut">
             サインアウト
           </li>
-          <li @click="log"></li>
+          <!-- <li @click="log"></li> -->
         </ul>
       </div>
     </div>
