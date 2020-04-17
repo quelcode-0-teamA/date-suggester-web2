@@ -8,7 +8,13 @@
           class="signin__input"
           type="email"
           placeholder="mail"
+          @blur="validateEmail"
         />
+        <span v-if="emailError" class="error"
+          ><small>
+            有効なemailを入力してください
+          </small>
+        </span>
         <input
           v-model="formal_user.password"
           class="signin__input"
@@ -49,10 +55,23 @@ export default {
         email: '',
         password: '',
         password_confirmation: ''
+      },
+      emailError: false,
+      errors: {
+        email: '有効なパスワードではありません',
+        password: []
       }
     }
   },
   methods: {
+    validateEmail() {
+      const mailFormat = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/
+      if (this.email === mailFormat) {
+        this.emailError = false
+      } else {
+        this.emailError = true
+      }
+    },
     signUp() {
       this.$axios
         .$post(
@@ -132,5 +151,8 @@ export default {
 }
 .url {
   color: #de436a;
+}
+.error {
+  color: red;
 }
 </style>

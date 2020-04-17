@@ -76,6 +76,18 @@ export default {
     this.login.id = this.$cookies.get('dsid')
     this.login.dateToken = this.$cookies.get('dstoken')
     this.login.email = this.$cookies.get('email')
+    if (this.login.id) {
+      this.$axios
+        .$get(`/v1/users/${this.login.id}`, {
+          headers: {
+            Authorization: 'Bearer ' + this.login.dateToken
+          }
+        })
+        .then((response) => {
+          console.log(response)
+          this.user.name = response.name
+        })
+    }
   },
   methods: {
     signOut() {
