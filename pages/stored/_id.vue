@@ -81,14 +81,18 @@
             </div>
             <div class="spots-container__spot-text">
               <h4>{{ spot.name }}</h4>
-              <p>
-                <font-awesome-icon icon="yen-sign"></font-awesome-icon>
-                {{ spot.budget }}
-              </p>
-              <p>
-                <font-awesome-icon icon="link"></font-awesome-icon>
-                {{ spot.url }}
-              </p>
+              <div>
+                <p>
+                  <font-awesome-icon icon="yen-sign"></font-awesome-icon>
+                  {{ spot.budget }}
+                </p>
+                <p>
+                  <font-awesome-icon icon="link"></font-awesome-icon>
+                  <a class="url" :href="spot.url">
+                    {{ spot.url }}
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -263,5 +267,9 @@ export default {
 .popup-buttons {
   display: flex;
   justify-content: space-around;
+}
+.url {
+  color: #de436a;
+  text-overflow: ellipsis;
 }
 </style>

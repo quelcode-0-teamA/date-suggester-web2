@@ -79,7 +79,7 @@ export default {
   methods: {
     signOut() {
       this.$axios
-        .$delete(`/v1/users/${this.login.id}`, {
+        .delete(`/v1/users/${this.login.id}`, {
           headers: {
             Authorization: 'Bearer ' + this.$cookies.get('dstoken')
           }

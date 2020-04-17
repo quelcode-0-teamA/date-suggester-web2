@@ -60,16 +60,18 @@
             </div>
             <div class="spots-container__spot-text">
               <h4>{{ spot.name }}</h4>
-              <p>
-                <font-awesome-icon icon="yen-sign"></font-awesome-icon>
-                {{ spot.budget }}
-              </p>
-              <p>
-                <font-awesome-icon icon="link"></font-awesome-icon>
-                <a :href="spot.url">
-                  {{ spot.url }}
-                </a>
-              </p>
+              <div>
+                <p>
+                  <font-awesome-icon icon="yen-sign"></font-awesome-icon>
+                  {{ spot.budget }}
+                </p>
+                <p>
+                  <font-awesome-icon icon="link"></font-awesome-icon>
+                  <a class="url" :href="spot.url">
+                    {{ spot.url }}
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -232,5 +234,9 @@ export default {
   border-left: 1px dotted #a2a2a2;
   height: 1000%;
   margin-left: 8px;
+}
+.url {
+  color: #de436a;
+  text-overflow: ellipsis;
 }
 </style>

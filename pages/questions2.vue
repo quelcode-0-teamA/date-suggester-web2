@@ -3,7 +3,9 @@
     <transition name="slide-fade-fast" mode="out-in">
       <template v-for="(icon, index) in icons">
         <div v-if="step === index" :key="index">
-          <img class="questions__icon" :src="icon.src" :alt="icon.alt" />
+          <div class="questions__icon-box">
+            <img class="questions__icon" :src="icon.src" :alt="icon.alt" />
+          </div>
           <h2 class="questions__ask">{{ icon.ask }}</h2>
           <form v-if="index === 0" class="questions__form">
             <base-button
@@ -177,8 +179,11 @@ export default {
   position: relative;
 }
 .questions {
-  &__icon {
+  // &__icon {
+  // }
+  &__icon-box {
     margin-bottom: 29px;
+    height: 256px;
   }
   &__ask {
     color: #fe5492;
