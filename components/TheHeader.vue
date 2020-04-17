@@ -73,6 +73,7 @@ export default {
     }
   },
   mounted() {
+    this.login.id = this.$cookies.get('dsid')
     this.login.dateToken = this.$cookies.get('dstoken')
     this.login.email = this.$cookies.get('email')
   },
