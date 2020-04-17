@@ -66,7 +66,7 @@ export default {
   methods: {
     validateEmail() {
       const mailFormat = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/
-      if (this.email === mailFormat) {
+      if (mailFormat === this.formal_user.email) {
         this.emailError = false
       } else {
         this.emailError = true
