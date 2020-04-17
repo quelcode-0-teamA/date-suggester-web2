@@ -8,13 +8,16 @@
           class="signin__input"
           type="email"
           placeholder="mail"
-          @blur="validateEmail"
+          @blur="$v.formal_user.email.$touch()"
         />
-        <span v-if="emailError" class="error"
-          ><small>
-            有効なemailを入力してください
-          </small>
-        </span>
+        <div v-if="$v.formal_user.email.$error" class="error">
+          <span v-if="!$v.formal_user.email.email" class="error-text">
+            メールアドレスの形式が正しくありません。
+          </span>
+          <span v-if="!$v.formal_user.email.required" class="error-text">
+            メールアドレスが入力されていません。
+          </span>
+        </div>
         <input
           v-model="formal_user.password"
           class="signin__input"
@@ -27,7 +30,10 @@
           type="password"
           placeholder="pass確認"
         />
-        <base-button buttonclass="button-signin" @click.prevent="signUp"
+        <base-button
+          :disabled="$v.$invalid"
+          buttonclass="button-signin"
+          @click.prevent="signUp"
           >sign up</base-button
         >
       </form>
@@ -44,10 +50,19 @@
 </template>
 
 <script>
+import { required, email } from 'vuelidate/lib/validators'
 import BaseButton from '~/components/BaseButton.vue'
 export default {
   components: {
     BaseButton
+  },
+  validations: {
+    formal_user: {
+      email: {
+        required,
+        email
+      }
+    }
   },
   data() {
     return {
@@ -63,41 +78,32 @@ export default {
       }
     }
   },
-  methods: {
-    validateEmail() {
-      const mailFormat = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/
-      if (mailFormat === this.formal_user.email) {
-        this.emailError = false
-      } else {
-        this.emailError = true
-      }
-    },
-    signUp() {
-      this.$axios
-        .$post(
-          '/v1/formal_user/sign_up',
-          {
-            formal_user: this.formal_user
-          },
-          {
-            headers: {
-              Authorization: 'Bearer ' + this.$cookies.get('dstoken')
-            }
+  methods: {},
+  signUp() {
+    this.$axios
+      .$post(
+        '/v1/formal_user/sign_up',
+        {
+          formal_user: this.formal_user
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$cookies.get('dstoken')
           }
-        )
-        .then((response) => {
-          console.log(response)
-          this.$cookies.set('email', response.email, {
-            path: '/',
-            maxAge: 60 * 60 * 24 * 7
-          })
-          this.$router.push('gallery')
+        }
+      )
+      .then((response) => {
+        console.log(response)
+        this.$cookies.set('email', response.email, {
+          path: '/',
+          maxAge: 60 * 60 * 24 * 7
         })
-    }
-    // log() {
-    //   console.log(this.$cookies.get('dstoken'))
-    // }
+        this.$router.push('gallery')
+      })
   }
+  // log() {
+  //   console.log(this.$cookies.get('dstoken'))
+  // }
 }
 </script>
 
@@ -153,6 +159,17 @@ export default {
   color: #de436a;
 }
 .error {
+  text-align: left;
+  padding-left: 5px;
+}
+.error-text {
   color: red;
+  font-size: 10px;
+  // text-align: left;
+}
+.error-input {
+  color: #8a0421;
+  border-color: #dd0f3b;
+  background-color: #ffd9d9;
 }
 </style>

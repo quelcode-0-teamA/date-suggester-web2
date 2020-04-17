@@ -70,7 +70,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    vendor: ['vuelidate'],
+    // vendor: ['vuelidate'],
     extend(config, ctx) {}
   }
 }

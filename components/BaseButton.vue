@@ -55,6 +55,13 @@ export default {
   &::-moz-focus-inner {
     border: none;
   }
+  &:disabled {
+    opacity: 0.67;
+    cursor: default;
+    &:hover {
+      transform: none;
+    }
+  }
 }
 .-start {
   width: 308px;
