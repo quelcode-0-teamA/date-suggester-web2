@@ -17,19 +17,43 @@
           <span v-if="!$v.formal_user.email.required" class="error-text">
             メールアドレスが入力されていません。
           </span>
+          <span v-if="!$v.formal_user.email.maxLength" class="error-text">
+            メールアドレスは255文字以内にしてください。
+          </span>
         </div>
         <input
           v-model="formal_user.password"
           class="signin__input"
           type="password"
           placeholder="pass"
+          @blur="$v.formal_user.password.$touch()"
         />
+        <div v-if="$v.formal_user.password.$error" class="error">
+          <span v-if="!$v.formal_user.password.required" class="error-text">
+            パスワードが入力されていません。
+          </span>
+          <span v-if="!$v.formal_user.password.minLength" class="error-text">
+            パスワードは8文字以上にしてください。
+          </span>
+          <span v-if="!$v.formal_user.password.alphaNum" class="error-text">
+            パスワードは英数字で入力してください。
+          </span>
+        </div>
         <input
           v-model="formal_user.password_confirmation"
           class="signin__input"
           type="password"
           placeholder="pass確認"
+          @input="$v.formal_user.password_confirmation.$touch()"
         />
+        <div v-if="$v.formal_user.password_confirmation.$error" class="error">
+          <span
+            v-if="!$v.formal_user.password_confirmation.sameAsPassword"
+            class="error-text"
+          >
+            パスワードが一致していません。
+          </span>
+        </div>
         <base-button
           :disabled="$v.$invalid"
           buttonclass="button-signin"
@@ -50,7 +74,14 @@
 </template>
 
 <script>
-import { required, email } from 'vuelidate/lib/validators'
+import {
+  required,
+  email,
+  maxLength,
+  sameAs,
+  minLength,
+  alphaNum
+} from 'vuelidate/lib/validators'
 import BaseButton from '~/components/BaseButton.vue'
 export default {
   components: {
@@ -60,7 +91,20 @@ export default {
     formal_user: {
       email: {
         required,
+        maxLength: maxLength(255),
         email
+      },
+      password: {
+        required,
+        alphaNum,
+        minLength: minLength(8)
+      },
+      password_confirmation: {
+        required,
+        alphaNum,
+        sameAsPassword: sameAs(function() {
+          return this.formal_user.password
+        })
       }
     }
   },
