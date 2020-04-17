@@ -87,6 +87,7 @@ export default {
         })
         .then((response) => {
           console.log(response)
+          this.login.email = 'null'
           this.$router.push('/')
         })
     },

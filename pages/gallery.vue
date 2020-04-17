@@ -25,7 +25,12 @@
       >デートプランを探す</base-button
     > -->
     <div v-once id="snackbar">
-      ログインをしないとプランは一週間しか保存されません
+      <font-awesome-icon
+        icon="times"
+        class="icon"
+        @click="hideBar"
+      ></font-awesome-icon>
+      &nbsp; サインインしないとプランは一週間しか保存されません
     </div>
   </div>
 </template>
@@ -48,12 +53,22 @@ export default {
         }
       })
   },
+  data() {
+    return {}
+  },
   mounted() {
     const x = document.getElementById('snackbar')
     x.className = 'show'
-    setTimeout(() => {
-      x.className.replace('show', '')
-    }, 3000)
+    const bar = localStorage.getItem('confirmed')
+    if (bar) {
+      document.getElementById('snackbar').className = 'hidden'
+    }
+  },
+  methods: {
+    hideBar() {
+      localStorage.setItem('confirmed', 'true')
+      document.getElementById('snackbar').className = 'hidden'
+    }
   }
 }
 </script>
@@ -113,28 +128,29 @@ export default {
   position: relative;
 }
 #snackbar {
-  visibility: hidden; /* Hidden by default. Visible on click */
-  min-width: 250px; /* Set a default minimum width */
-  background-color: #a2a2a2; /* Black background color */
-  color: #fff; /* White text color */
-  text-align: center; /* Centered text */
-  border-radius: 5px; /* Rounded borders */
-  padding: 16px; /* Padding */
-  position: fixed; /* Sit on top of the screen */
-  z-index: 1; /* Add a z-index if needed */
-  left: 50%; /* Center the snackbar */
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #a2a2a2;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
   transform: translateX(-50%);
-  bottom: 30px; /* 30px from the bottom */
+  bottom: 30px;
 }
 #snackbar.show {
-  visibility: visible; /* Show the snackbar */
-  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-  However, delay the fade out process for 2.5 seconds */
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  visibility: visible;
+  -webkit-animation: fadein 0.5s;
+  animation: fadein 0.5s;
 }
 .hidden {
   visibility: hidden;
+}
+.icon {
+  cursor: pointer;
 }
 @-webkit-keyframes fadein {
   from {

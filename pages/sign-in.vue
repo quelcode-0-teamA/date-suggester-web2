@@ -19,7 +19,7 @@
           >sign in</base-button
         >
       </form>
-      <nuxt-link to="sign-up">新規登録はこちら</nuxt-link>
+      <nuxt-link class="url" to="sign-up">新規登録はこちら</nuxt-link>
     </div>
     <div class="signin__img-box">
       <img
@@ -64,6 +64,10 @@ export default {
         )
         .then((response) => {
           console.log(response)
+          this.$cookies.set('email', response.email, {
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7
+          })
           this.$router.push('gallery')
         })
     }
@@ -118,5 +122,8 @@ export default {
     left: 50%;
     transform: translateX(-50%);
   }
+}
+.url {
+  color: #de436a;
 }
 </style>

@@ -25,7 +25,7 @@
           >sign up</base-button
         >
       </form>
-      <nuxt-link to="sign-in">サインインはこちら</nuxt-link>
+      <nuxt-link class="url" to="sign-in">サインインはこちら</nuxt-link>
     </div>
     <div class="signin__img-box">
       <img
@@ -129,5 +129,8 @@ export default {
     left: 50%;
     transform: translateX(-50%);
   }
+}
+.url {
+  color: #de436a;
 }
 </style>
