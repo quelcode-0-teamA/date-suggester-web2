@@ -27,7 +27,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/vuelidate.js' }],
   /*
    ** Nuxt.js dev-modules
    */
@@ -70,6 +70,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    vendor: ['vuelidate'],
     extend(config, ctx) {}
   }
 }
