@@ -8,14 +8,41 @@
           class="signin__input"
           type="email"
           placeholder="mail"
+          @blur="$v.user.email.$touch()"
         />
+        <div v-if="$v.user.email.$error" class="error">
+          <span v-if="!v$.user.email.email" class="error-text"
+            >メールアドレスの形式が正しくありません。
+          </span>
+          <span v-if="!v$.user.email.required" class="error-text"
+            >メールアドレスが入力されていません。
+          </span>
+          <span v-if="!v$.user.email.maxLength" class="error-text"
+            >メールアドレスは255字以内です。
+          </span>
+        </div>
         <input
           v-model="user.password"
           class="signin__input"
           type="password"
           placeholder="pass"
+          @blur="$v.user.password.touch()"
         />
-        <base-button buttonclass="button-signin" @click="signIn"
+        <div v-if="$v.user.password.$error" class="error">
+          <span v-if="!$v.user.password.required" class="error-text">
+            パスワードが入力されていません。
+          </span>
+          <span v-if="!$v.user.password.alphaNum" class="error-text">
+            パスワードは英数字で入力してください。
+          </span>
+          <span v-if="!$v.user.password.minLength" class="error-text">
+            パスワードは8字以上にしてください。
+          </span>
+        </div>
+        <base-button
+          :disabled="$v.$invalid"
+          buttonclass="button-signin"
+          @click.prevent="signIn"
           >sign in</base-button
         >
       </form>
@@ -32,8 +59,29 @@
 </template>
 
 <script>
+import {
+  required,
+  email,
+  maxLength,
+  minLength,
+  alphaNum
+} from 'vuelidate/lib/validators'
 import BaseButton from '~/components/BaseButton.vue'
 export default {
+  validations: {
+    user: {
+      email: {
+        required,
+        email,
+        maxLength: maxLength(255)
+      },
+      password: {
+        required,
+        alphaNum,
+        minLength: minLength(8)
+      }
+    }
+  },
   components: {
     BaseButton
   },
@@ -125,5 +173,19 @@ export default {
 }
 .url {
   color: #de436a;
+}
+.error {
+  text-align: left;
+  padding-left: 5px;
+}
+.error-text {
+  color: red;
+  font-size: 10px;
+  // text-align: left;
+}
+.error-input {
+  color: #8a0421;
+  border-color: #dd0f3b;
+  background-color: #ffd9d9;
 }
 </style>
