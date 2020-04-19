@@ -87,6 +87,11 @@ export default {
   &:hover {
     background-color: #ffce00;
   }
+  &:disabled {
+    &:hover {
+      background-color: #ffe691;
+    }
+  }
 }
 .button-option {
   width: 332px;

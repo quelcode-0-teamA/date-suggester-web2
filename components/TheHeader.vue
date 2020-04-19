@@ -80,7 +80,6 @@ export default {
           }
         })
         .then((response) => {
-          console.log(response)
           this.user.name = response.name
         })
     }
@@ -94,16 +93,9 @@ export default {
           }
         })
         .then((response) => {
-          console.log(response)
           this.login.email = 'null'
           this.$router.push('/')
         })
-    },
-    log() {
-      console.log(this.login)
-      console.log(this.login.dateToken !== '' && this.login.email !== 'null')
-      console.log(typeof this.login.email)
-      console.log('asdf' && 'asdga')
     }
   }
 }

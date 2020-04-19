@@ -15,7 +15,10 @@
                 {{ year }}
               </option>
             </select>
-            <base-button buttonclass="button-step" @click.prevent="step += 1"
+            <base-button
+              :disabled="!selectedYear"
+              buttonclass="button-step"
+              @click.prevent="step += 1"
               >次へ</base-button
             >
           </form>
@@ -25,7 +28,10 @@
                 {{ area.name }}
               </option>
             </select>
-            <base-button buttonclass="button-step" @click.prevent="setToken"
+            <base-button
+              :disabled="!selectedArea"
+              buttonclass="button-step"
+              @click.prevent="setToken"
               >次へ</base-button
             >
           </form>
@@ -57,7 +63,7 @@ export default {
     return {
       step: 0,
       selectedYear: null,
-      selectedArea: {},
+      selectedArea: null,
       icons: [
         {
           src: require('@/assets/cake.png'),
