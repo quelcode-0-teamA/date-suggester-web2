@@ -21,11 +21,15 @@
           alt="あなたのアバターです"
         />
         <ul class="dropdown__content">
-          <li dropdown__name>
+          <li v-if="user.name" dropdown__name>
             {{ user.name }}
             <small>
               さん
             </small>
+          </li>
+          <li v-else dropdown__name>
+            名もなき恋の達人
+            <small>さん</small>
           </li>
           <li class="dropdown__edit" @click="$router.push('edit')">
             登録情報の編集
@@ -33,7 +37,6 @@
           <li v-if="loggedIn" class="dropdown__signout" @click="signOut">
             サインアウト
           </li>
-          <!-- <li @click="log"></li> -->
         </ul>
       </div>
     </div>
@@ -41,11 +44,8 @@
 </template>
 
 <script>
-// import BaseButton from '~/components/BaseButton.vue'
 export default {
-  components: {
-    // BaseButton
-  },
+  components: {},
   data() {
     return {
       user: {
@@ -57,10 +57,6 @@ export default {
         dateToken: '',
         email: 'null'
       }
-      // avatar: {
-      //   type: String,
-      //   default: require('@/assets/avatar.png')
-      // }
     }
   },
   computed: {
