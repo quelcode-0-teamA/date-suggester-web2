@@ -126,7 +126,6 @@ export default {
         }
       })
       .then((response) => {
-        console.log(response)
         return {
           stored: response,
           dateToken
@@ -150,7 +149,6 @@ export default {
           }
         })
         .then((response) => {
-          console.log(response)
           this.$router.push('../gallery')
         })
     }

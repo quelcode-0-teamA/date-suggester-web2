@@ -38,8 +38,6 @@
         </div>
       </template>
     </transition>
-    <!-- <p>{{ selectedYear }}</p>
-    <p>{{ selectedArea.id }}</p> -->
     <div class="progress">
       <div class="progress__inner">
         <div class="progress__inner-0"></div>
@@ -97,7 +95,6 @@ export default {
           }
         })
         .then((response) => {
-          console.log(response)
           this.$cookies.set('dsid', response.id, {
             path: '/',
             maxAge: 60 * 60 * 24 * 7

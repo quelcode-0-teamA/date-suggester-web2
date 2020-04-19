@@ -9,11 +9,8 @@
 </template>
 
 <script>
-// import BaseButton from '@/components/BaseButton.vue'
 export default {
-  components: {
-    // BaseButton
-  }
+  components: {}
 }
 </script>
 

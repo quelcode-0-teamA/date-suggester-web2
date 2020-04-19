@@ -178,6 +178,13 @@ export default {
 .button-edit {
   width: 176px;
   height: 40px;
+  margin-top: 125px;
+  &:disabled {
+    &:hover {
+      background: transparent;
+      border: 1px solid white;
+    }
+  }
 }
 .button-gallery {
   max-width: 308px;

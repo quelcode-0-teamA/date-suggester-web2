@@ -19,11 +19,6 @@
         </nuxt-link>
       </figure>
     </div>
-    <!-- <base-button
-      buttonclass="button-gallery"
-      @click="$router.push('questions2')"
-      >デートプランを探す</base-button
-    > -->
     <div v-once id="snackbar">
       <font-awesome-icon
         icon="times"
@@ -46,7 +41,6 @@ export default {
         }
       })
       .then((response) => {
-        console.log(response)
         return {
           galleryItems: response,
           dateToken

@@ -103,7 +103,6 @@ export default {
         }
       })
       .then((response) => {
-        console.log(response)
         return {
           suggest: response,
           dateToken
@@ -130,7 +129,6 @@ export default {
           }
         )
         .then((response) => {
-          console.log(response)
           this.$router.push('/gallery')
         })
     }
