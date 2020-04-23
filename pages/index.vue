@@ -10,7 +10,8 @@
 
 <script>
 export default {
-  components: {}
+  components: {},
+  methods: {}
 }
 </script>
 

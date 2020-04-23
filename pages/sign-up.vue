@@ -137,7 +137,6 @@ export default {
         }
       )
       .then((response) => {
-        console.log(response)
         this.$cookies.set('email', response.email, {
           path: '/',
           maxAge: 60 * 60 * 24 * 7
@@ -145,9 +144,6 @@ export default {
         this.$router.push('gallery')
       })
   }
-  // log() {
-  //   console.log(this.$cookies.get('dstoken'))
-  // }
 }
 </script>
 
