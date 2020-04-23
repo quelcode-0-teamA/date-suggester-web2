@@ -3,13 +3,16 @@
     <h1 class="header__title" @click="$router.push('/')">
       Date Suggester
     </h1>
-    <div v-if="$store.state.login.dateToken" class="nav-links">
+    <div v-if="$store.state.login.dateToken && !vw" class="nav-links">
       <ul>
         <li>
           <nuxt-link class="nav-link" to="/questions">プランを探す</nuxt-link>
         </li>
         <li>
           <nuxt-link class="nav-link" to="/gallery">保存したプラン</nuxt-link>
+        </li>
+        <li>
+          <nuxt-link class="nav-link" to="/edit">登録情報の編集</nuxt-link>
         </li>
         <li>
           <nuxt-link v-if="!loggedIn" class="nav-link" to="/sign-in"
@@ -21,28 +24,40 @@
             >新規登録</nuxt-link
           >
         </li>
-        <li>
-          <nuxt-link class="nav-link" to="/edit">登録情報の編集</nuxt-link>
+      </ul>
+    </div>
+    <div v-if="$store.state.login.dateToken && vw" class="menu-dropdown">
+      <div class="menu-dropdown__icon">
+        <font-awesome-icon icon="bars"></font-awesome-icon>
+      </div>
+      <ul id="show" class="menu-dropdown__items">
+        <li class="menu-dropdown__item">
+          <span class="" @click="$router.push('/questions')">プランを探す</span>
+        </li>
+        <li class="menu-dropdown__item">
+          <span class="" @click="$router.push('/gallery')">保存したプラン</span>
+        </li>
+        <li class="menu-dropdown__item">
+          <span class="" @click="$router.push('/edit')">登録情報の編集</span>
+        </li>
+        <li class="menu-dropdown__item">
+          <span v-if="!loggedIn" class="" @click="$router.push('/sign-in')"
+            >サインイン</span
+          >
+        </li>
+        <li class="menu-dropdown__item">
+          <span v-if="!loggedIn" class="" @click="$router.push('/sign-up')"
+            >新規登録</span
+          >
+        </li>
+        <li
+          v-if="loggedIn"
+          class="menu-dropdown__item menu-dropdown__signout"
+          @click="signOut"
+        >
+          <span>サインアウト</span>
         </li>
       </ul>
-      <!-- <ul class="dropdown__content">
-        <li v-if="user.name" dropdown__name>
-          {{ user.name }}
-          <small>
-            さん
-          </small>
-        </li>
-        <li v-else dropdown__name>
-          名もなき恋の達人
-          <small>さんの</small>
-        </li>
-        <li class="dropdown__edit" @click="$router.push('/edit')">
-          登録情報の編集
-        </li>
-        <li v-if="loggedIn" class="dropdown__signout" @click="signOut">
-          サインアウト
-        </li>
-      </ul> -->
     </div>
   </header>
 </template>
@@ -51,19 +66,19 @@
 import { mapMutations } from 'vuex'
 export default {
   data() {
-    return {}
+    return {
+      windowWidth: window.innerWidth
+    }
   },
   computed: {
     loggedIn() {
       return this.$store.getters.loggedIn
-    }
-  },
-  watch: {
-    loggedIn: {
-      immediate: false,
-      deep: true,
-      handler() {
-        this.$router.go({ path: this.$router.currentRoute.path, force: true })
+    },
+    vw() {
+      if (this.windowWidth < 990) {
+        return true
+      } else {
+        return false
       }
     }
   },
@@ -73,6 +88,12 @@ export default {
       dateToken: this.$cookies.get('dstoken'),
       email: this.$cookies.get('email')
     })
+  },
+  mounted() {
+    window.addEventListener('resize', this.calculateWindowWidth)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.calculateWindowWidth)
   },
   methods: {
     signOut() {
@@ -87,7 +108,13 @@ export default {
           this.$router.push('/')
         })
     },
-    ...mapMutations(['UPDATE_LOGIN'])
+    calculateWindowWidth() {
+      this.windowWidth = window.innerWidth
+    },
+    ...mapMutations(['UPDATE_LOGIN']),
+    addShow() {
+      document.getElementById('show').classList.add('show')
+    }
   }
 }
 </script>
@@ -115,14 +142,12 @@ export default {
     display: inline-block;
   }
 }
-.test {
-  grid-template-columns: 1 / 2;
-}
 .nav-links {
   vertical-align: middle;
   align-items: center;
   justify-content: flex-end;
   position: relative;
+  margin-left: auto;
   ul {
     display: flex;
     padding: 0;
@@ -142,55 +167,59 @@ export default {
     background-color: rgba(white, 0.3);
   }
 }
-.dropdown {
-  height: 57px;
-  margin: 0 16px 0 8px;
-  text-align: center;
-  vertical-align: middle;
+.menu-dropdown {
+  // grid-template-columns: 3 / 4;
+  position: relative;
   display: flex;
-  cursor: pointer;
-  &__content {
+  &__icon {
+    height: 100%;
+    line-height: 57px;
+    display: block;
+    color: white;
+    font-size: 20px;
+    padding: 0 16px;
+    margin-left: auto;
+    cursor: pointer;
+    z-index: 1;
+  }
+  &__items {
     display: none;
+    background-color: #eee;
     position: absolute;
     top: 57px;
-    right: 0px;
-    background-color: #eee;
-    // border-radius: 5px;
-    min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba($color: #000000, $alpha: 0.2);
-    z-index: 1;
+    right: 0;
     list-style: none;
-    padding-left: 0;
+    padding: 0;
+    box-shadow: 0 8px 16px 0 rgba($color: #000000, $alpha: 0.2);
   }
-  &:hover &__content {
+  &__icon:hover + &__items {
     display: block;
   }
-  &__content:hover {
+  &__items .show {
     display: block;
+    animation: show 1s linear 0s;
   }
-  &__content > li {
-    padding: 5px 10px;
+  &__item {
+    padding: 5px 16px;
+    font-size: 14px;
   }
-  &__content > li:hover {
+  &__item:hover {
     background-color: rgba($color: white, $alpha: 0.67);
   }
-  &__content > li + li {
+  &__items li + li {
     border-top: 1px solid rgba($color: #707070, $alpha: 1);
     cursor: pointer;
   }
-  &__name {
-    font-size: 14px;
-  }
-  &__edit {
-    font-size: 13px;
-  }
   &__signout {
-    font-size: 11px;
     color: #de436a;
   }
 }
-.avatar {
-  display: inline-block;
-  align-self: center;
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
