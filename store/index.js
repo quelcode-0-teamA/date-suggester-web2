@@ -25,9 +25,6 @@ export const mutations = {
     state.login.id = value.id
     state.login.dateToken = value.dateToken
     state.login.email = value.email
-  },
-  UPDATE_LOGIN_ID(state, value) {
-    state.login.id = value.id
   }
 }
 
@@ -35,7 +32,11 @@ export const getters = {
   qParams(state) {
     return `date_area=${state.answers.date_area}&date_budget=${state.answers.date_budget}&date_time=${state.answers.date_time}&date_type=${state.answers.date_type}`
   },
-  loginState(state) {
-    return state.login
+  loggedIn(state) {
+    if (state.login.dateToken && state.login.email !== 'null') {
+      return true
+    } else {
+      return false
+    }
   }
 }

@@ -1,13 +1,9 @@
 <template>
   <header class="header">
-    <p v-if="!loggedIn" class="test">
-      {{ reverse }}
-      <input v-model="text" />
-    </p>
     <h1 class="header__title" @click="$router.push('/')">
       Date Suggester
     </h1>
-    <div v-if="!$store.state.login.dateToken" class="nav-links">
+    <div v-if="$store.state.login.dateToken" class="nav-links">
       <ul>
         <li>
           <nuxt-link class="nav-link" to="/questions">プランを探す</nuxt-link>
@@ -29,31 +25,24 @@
           <nuxt-link class="nav-link" to="/edit">登録情報の編集</nuxt-link>
         </li>
       </ul>
-      <div class="header__sign-in dropdown" to="sign-in">
-        <img
-          class="avatar"
-          src="@/assets/avatar.png"
-          alt="あなたのアバターです"
-        />
-        <ul class="dropdown__content">
-          <li v-if="user.name" dropdown__name>
-            {{ user.name }}
-            <small>
-              さん
-            </small>
-          </li>
-          <li v-else dropdown__name>
-            名もなき恋の達人
-            <small>さんの</small>
-          </li>
-          <li class="dropdown__edit" @click="$router.push('/edit')">
-            登録情報の編集
-          </li>
-          <li v-if="loggedIn" class="dropdown__signout" @click="signOut">
-            サインアウト
-          </li>
-        </ul>
-      </div>
+      <!-- <ul class="dropdown__content">
+        <li v-if="user.name" dropdown__name>
+          {{ user.name }}
+          <small>
+            さん
+          </small>
+        </li>
+        <li v-else dropdown__name>
+          名もなき恋の達人
+          <small>さんの</small>
+        </li>
+        <li class="dropdown__edit" @click="$router.push('/edit')">
+          登録情報の編集
+        </li>
+        <li v-if="loggedIn" class="dropdown__signout" @click="signOut">
+          サインアウト
+        </li>
+      </ul> -->
     </div>
   </header>
 </template>
@@ -61,76 +50,16 @@
 <script>
 import { mapMutations } from 'vuex'
 export default {
-  components: {},
-  // asyncData({ $axios, app }) {
-  //   const id = app.$cookies.get('dsid')
-  //   const dateToken = app.$cookies.get('dstoken')
-  //   const email = app.$cookies.get('email')
-  //   return {
-  //     login: {
-  //       id,
-  //       dateToken,
-  //       email
-  //     }
-  //   }
-  // if (id) {
-  //   $axios
-  //     .$get(`/v1/users/${id}`, {
-  //       headers: {
-  //         Authorization: 'Bearer ' + dateToken
-  //       }
-  //     })
-  //     .then((response) => {
-  //       return {
-  //         login: {
-  //           id,
-  //           dateToken,
-  //           email
-  //         }
-  //       }
-  //     })
-  // }
-  // },
   data() {
-    return {
-      user: {
-        avatar: null,
-        name: '名もなき恋の達人'
-      },
-      login: {
-        id: '',
-        dateToken: '',
-        email: 'null'
-      },
-      text: ''
-    }
+    return {}
   },
   computed: {
     loggedIn() {
-      if (
-        this.$store.state.login.dateToken &&
-        this.$store.state.login.email !== 'null'
-      ) {
-        return true
-      } else {
-        return false
-      }
-    },
-    windowWidth() {
-      return document.body.clientWidth
-    },
-    reverse() {
-      return this.text
-        .split('')
-        .reverse()
-        .join('')
-    },
-    loginState() {
-      return this.$store.getters.loginState
+      return this.$store.getters.loggedIn
     }
   },
   watch: {
-    loginState: {
+    loggedIn: {
       immediate: false,
       deep: true,
       handler() {
@@ -138,28 +67,12 @@ export default {
       }
     }
   },
-  mount() {
-    // 引数の渡し方合っているか？
-    const login = {
+  created() {
+    this.UPDATE_LOGIN({
       id: this.$cookies.get('dsid'),
       dateToken: this.$cookies.get('dstoken'),
       email: this.$cookies.get('email')
-    }
-    this.UPDATE_LOGIN_ID(login)
-    // this.login.id = this.$cookies.get('dsid')
-    // this.login.dateToken = this.$cookies.get('dstoken')
-    // this.login.email = this.$cookies.get('email')
-    // if (this.login.id) {
-    //   this.$axios
-    //     .$get(`/v1/users/${this.login.id}`, {
-    //       headers: {
-    //         Authorization: 'Bearer ' + this.login.dateToken
-    //       }
-    //     })
-    //     .then((response) => {
-    //       this.user.name = response.name
-    //     })
-    // }
+    })
   },
   methods: {
     signOut() {
