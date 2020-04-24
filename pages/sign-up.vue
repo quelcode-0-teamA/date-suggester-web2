@@ -62,6 +62,11 @@
         >
       </form>
       <nuxt-link class="url" to="sign-in">サインインはこちら</nuxt-link>
+      <p class="to-agreement">
+        <span @click="$router.push('/privacy-policy')"
+          >プライバシーポリシー</span
+        >を確認した上でご登録ください。
+      </p>
     </div>
     <div class="signin__img-box">
       <img
@@ -211,5 +216,14 @@ export default {
   color: #8a0421;
   border-color: #dd0f3b;
   background-color: #ffd9d9;
+}
+.to-agreement {
+  font-size: 13px;
+  margin-top: 15px;
+  span {
+    color: #de436a;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 }
 </style>
