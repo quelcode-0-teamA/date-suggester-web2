@@ -79,7 +79,7 @@ export default {
   computed: {
     getYears() {
       const years = []
-      for (let i = 2000; i > 1959; i--) {
+      for (let i = 2002; i > 1959; i--) {
         years.push(i)
       }
       return years

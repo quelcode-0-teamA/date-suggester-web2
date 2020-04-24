@@ -1,5 +1,24 @@
 <template>
   <div class="container">
+    <popup v-if="showModal" @toggle-modal="showModal = false">
+      <template>
+        <h4 class="popup-text">
+          本当にアカウントを削除しますか？
+        </h4>
+        <div class="popup-buttons">
+          <base-button
+            buttonclass="button-popup-back"
+            @click.prevent="toggleModal"
+            >削除しない</base-button
+          >
+          <base-button
+            buttonclass="button-popup-delete"
+            @click.prevent="userDelete"
+            >削除する</base-button
+          >
+        </div>
+      </template>
+    </popup>
     <transition name="slide-fade" mode="out-in">
       <div v-if="step === 1" class="edit">
         <h2 class="edit__text">あなたの名前は？</h2>
@@ -95,26 +114,20 @@
         </form>
       </div>
     </transition>
-
-    <!-- <base-button
-      v-if="step < 4"
-      buttonclass="button-edit"
-      :disabled="disabled"
-      @click="updateAnswers"
-      >next</base-button
-    > -->
-    <!-- <base-button v-else buttonclass="button-edit" @click="updateAnswers"
-      >決定</base-button
-    > -->
+    <p class="user-delete" @click="toggleModal">
+      アカウント削除はこちらをクリック
+    </p>
   </div>
 </template>
 
 <script>
 import { email, required, maxLength } from 'vuelidate/lib/validators'
 import BaseButton from '~/components/BaseButton.vue'
+import Popup from '~/components/Popup.vue'
 export default {
   components: {
-    BaseButton
+    BaseButton,
+    Popup
   },
   validations: {
     user: {
@@ -143,7 +156,8 @@ export default {
         gender: 'male',
         area_id: null
       },
-      step: 1
+      step: 1,
+      showModal: false
     }
   },
   computed: {
@@ -181,6 +195,22 @@ export default {
       } else {
         this.step++
       }
+    },
+    userDelete() {
+      this.$axios
+        .delete(`/v1/users/${this.login.id}`, {
+          headers: {
+            Authorization: 'Bearer ' + this.$cookies.get('dstoken')
+          }
+        })
+        .then((response) => {
+          this.$cookies.removeAll()
+          localStorage.removeItem('confirmed')
+          this.$router.push('/')
+        })
+    },
+    toggleModal() {
+      this.showModal = !this.showModal
     }
   }
 }
@@ -248,5 +278,21 @@ export default {
   color: white;
   font-size: 10px;
   // text-align: left;
+}
+.user-delete {
+  position: absolute;
+  left: 32px;
+  bottom: 32px;
+}
+.popup-text {
+  text-align: center;
+  color: #5d5d5d;
+  font-size: 15px;
+  width: 548px;
+  margin-bottom: 32px;
+}
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
 }
 </style>

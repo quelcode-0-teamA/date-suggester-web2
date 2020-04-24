@@ -3,7 +3,7 @@
     <h1 class="header__title" @click="$router.push('/')">
       Date Suggester
     </h1>
-    <div v-if="$store.state.login.dateToken && !vw" class="nav-links">
+    <div v-if="$store.state.login.id && !vw" class="nav-links">
       <ul>
         <li>
           <nuxt-link class="nav-link" to="/questions">プランを探す</nuxt-link>
@@ -26,7 +26,7 @@
         </li>
       </ul>
     </div>
-    <div v-if="$store.state.login.dateToken && vw" class="menu-dropdown">
+    <div v-else-if="$store.state.login.id && vw" class="menu-dropdown">
       <div class="menu-dropdown__icon">
         <font-awesome-icon icon="bars"></font-awesome-icon>
       </div>
@@ -56,6 +56,13 @@
           @click="signOut"
         >
           <span>サインアウト</span>
+        </li>
+      </ul>
+    </div>
+    <div v-else class="nav-links">
+      <ul>
+        <li>
+          <nuxt-link class="nav-link" to="/sign-in">サインイン</nuxt-link>
         </li>
       </ul>
     </div>
@@ -97,16 +104,7 @@ export default {
   },
   methods: {
     signOut() {
-      this.$axios
-        .delete(`/v1/users/${this.login.id}`, {
-          headers: {
-            Authorization: 'Bearer ' + this.$cookies.get('dstoken')
-          }
-        })
-        .then((response) => {
-          this.login.email = 'null'
-          this.$router.push('/')
-        })
+      this.$cookies.remove('dstoken')
     },
     calculateWindowWidth() {
       this.windowWidth = window.innerWidth
