@@ -5,36 +5,42 @@
         <div v-if="step === index" :key="index">
           <img class="questions__icon" :src="icon.src" :alt="icon.alt" />
           <h2 class="questions__ask">{{ icon.ask }}</h2>
-          <form v-if="index === 0" class="questions__form">
-            <select
-              v-model="selectedYear"
-              class="year-select"
-              name="birth-year"
-            >
-              <option v-for="year in getYears" :key="year" :value="year">
-                {{ year }}
-              </option>
-            </select>
-            <base-button
-              :disabled="!selectedYear"
-              buttonclass="button-step"
-              @click.prevent="step += 1"
-              >次へ</base-button
-            >
-          </form>
-          <form v-else-if="index === 1" class="questions__form">
-            <select v-model="selectedArea" class="year-select" name="areas">
-              <option v-for="area in areas" :key="area.id" :value="area">
-                {{ area.name }}
-              </option>
-            </select>
-            <base-button
-              :disabled="!selectedArea"
-              buttonclass="button-step"
-              @click.prevent="setToken"
-              >次へ</base-button
-            >
-          </form>
+          <div class="select-wrapper">
+            <font-awesome-icon
+              class="sort-icon"
+              icon="sort-down"
+            ></font-awesome-icon>
+            <form v-if="index === 0" class="questions__form">
+              <select
+                v-model="selectedYear"
+                class="year-select"
+                name="birth-year"
+              >
+                <option v-for="year in getYears" :key="year" :value="year">
+                  {{ year }}
+                </option>
+              </select>
+              <base-button
+                :disabled="!selectedYear"
+                buttonclass="button-step"
+                @click.prevent="step += 1"
+                >次へ</base-button
+              >
+            </form>
+            <form v-else-if="index === 1" class="questions__form">
+              <select v-model="selectedArea" class="year-select" name="areas">
+                <option v-for="area in areas" :key="area.id" :value="area">
+                  {{ area.name }}
+                </option>
+              </select>
+              <base-button
+                :disabled="!selectedArea"
+                buttonclass="button-step"
+                @click.prevent="setToken"
+                >次へ</base-button
+              >
+            </form>
+          </div>
         </div>
       </template>
     </transition>
@@ -60,7 +66,7 @@ export default {
   data() {
     return {
       step: 0,
-      selectedYear: null,
+      selectedYear: 1994,
       selectedArea: null,
       icons: [
         {
@@ -219,5 +225,15 @@ export default {
 .slide-fade-fast-leave-to {
   opacity: 0;
   transform: translateX(-10px);
+}
+
+.select-wrapper {
+  position: relative;
+  & > .sort-icon {
+    position: absolute;
+    top: 90px;
+    left: calc(50% + 110px);
+    pointer-events: none;
+  }
 }
 </style>

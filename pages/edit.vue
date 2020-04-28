@@ -105,6 +105,10 @@
       <div v-else class="edit">
         <h2 class="edit__text">よく行く場所はどこですか？</h2>
         <div class="select-wrapper">
+          <font-awesome-icon
+            class="sort-icon"
+            icon="sort-down"
+          ></font-awesome-icon>
           <form class="edit__input">
             <select v-model="selectedArea" class="year-select" name="areas">
               <option v-for="area in areas" :key="area.id" :value="area">
@@ -216,6 +220,7 @@ export default {
         .then((response) => {
           this.$cookies.removeAll()
           localStorage.removeItem('confirmed')
+          window.alert('アカウントを削除しました。')
           this.$router.push('/')
         })
     },
