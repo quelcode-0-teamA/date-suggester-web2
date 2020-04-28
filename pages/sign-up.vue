@@ -61,7 +61,10 @@
           >sign up</base-button
         >
       </form>
-      <nuxt-link class="url" to="sign-in">サインインはこちら</nuxt-link>
+      <nuxt-link class="url" to="/sign-in">サインインはこちら</nuxt-link>
+      <p class="to-agreement">
+        アプリを一度使用することで新規登録が可能になります。
+      </p>
       <p class="to-agreement">
         <span @click="$router.push('/privacy-policy')"
           >プライバシーポリシー</span
@@ -142,11 +145,23 @@ export default {
         }
       )
       .then((response) => {
+        // id, token を別の値にして保存した方が良いか？
+        this.$cookies.set('dsid', response.id, {
+          path: '/',
+          maxAge: 60 * 60 * 24 * 7
+        })
+        this.$cookies.set('dstoken', response.token, {
+          path: '/',
+          maxAge: 60 * 60 * 24 * 7
+        })
         this.$cookies.set('email', response.email, {
           path: '/',
           maxAge: 60 * 60 * 24 * 7
         })
-        this.$router.push('gallery')
+        this.$router.push('/gallery')
+      })
+      .catch(() => {
+        window.alert('一度アプリをお試ししてから新規登録をしてください。')
       })
   }
 }

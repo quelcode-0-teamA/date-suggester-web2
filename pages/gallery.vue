@@ -143,8 +143,9 @@ export default {
 .hidden {
   visibility: hidden;
 }
-.icon {
+#snackbar .icon {
   cursor: pointer;
+  color: white;
 }
 @-webkit-keyframes fadein {
   from {

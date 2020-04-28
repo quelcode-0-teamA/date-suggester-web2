@@ -77,7 +77,7 @@
         </div>
       </div>
       <div class="button-container">
-        <nuxt-link to="questions2">
+        <nuxt-link to="/questions2">
           <base-button buttonclass="button-back">選び直す</base-button>
         </nuxt-link>
         <base-button buttonclass="button-pick" @click="addMyPlan"

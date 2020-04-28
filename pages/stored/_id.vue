@@ -98,7 +98,7 @@
         </div>
       </div>
       <div class="button-container">
-        <nuxt-link to="../gallery">
+        <nuxt-link to="/gallery">
           <base-button buttonclass="button-back">戻る</base-button>
         </nuxt-link>
         <base-button buttonclass="button-delete" @click="toggleModal"

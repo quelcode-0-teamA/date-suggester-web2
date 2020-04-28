@@ -158,7 +158,7 @@ export default {
       }
       if (e.target.name === 'date_type') {
         this.UPDATE_ANSWERS(this.answers)
-        this.$router.push('suggest')
+        this.$router.push('/suggest')
       } else {
         this.step++
       }
