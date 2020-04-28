@@ -26,6 +26,8 @@ export default {
 
 <style lang="scss">
 .error-link {
+  display: inline-block;
+  padding: 24px;
   text-decoration: underline;
 }
 </style>

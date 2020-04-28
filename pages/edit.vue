@@ -27,6 +27,7 @@
             v-model="user.name"
             class="name-input edit__input"
             type="text"
+            autofocus
             @blur="$v.user.name.$touch()"
           />
           <div v-if="$v.user.name.$error" class="error">
@@ -76,42 +77,49 @@
       </div>
       <div v-else-if="step === 3" class="edit">
         <h2 class="edit__text">あなたの生まれた年は？</h2>
-        <form class="edit__input">
-          <select
-            v-model="user.birth_year"
-            class="year-select"
-            name="birth-year"
-          >
-            <font-awesome-icon icon="sort-down"></font-awesome-icon>
-            <option v-for="year in getYears" :key="year" :value="year">
-              {{ year }}
-            </option>
-          </select>
-          <base-button
-            v-if="step < 4"
-            buttonclass="button-edit"
-            :disabled="!user.birth_year"
-            @click.prevent="updateAnswers"
-            >next</base-button
-          >
-        </form>
+        <div class="select-wrapper">
+          <font-awesome-icon
+            class="sort-icon"
+            icon="sort-down"
+          ></font-awesome-icon>
+          <form class="edit__input">
+            <select
+              v-model="user.birth_year"
+              class="year-select"
+              name="birth-year"
+            >
+              <option v-for="year in getYears" :key="year" :value="year">
+                {{ year }}
+              </option>
+            </select>
+            <base-button
+              v-if="step < 4"
+              buttonclass="button-edit"
+              :disabled="!user.birth_year"
+              @click.prevent="updateAnswers"
+              >next</base-button
+            >
+          </form>
+        </div>
       </div>
       <div v-else class="edit">
         <h2 class="edit__text">よく行く場所はどこですか？</h2>
-        <form class="edit__input">
-          <select v-model="user.area_id" class="year-select" name="areas">
-            <option v-for="area in areas" :key="area.id" :value="area">
-              {{ area.name }}
-            </option>
-          </select>
-          <base-button
-            v-if="step === 4"
-            buttonclass="button-edit"
-            :disabled="user.area_id"
-            @click.prevent="updateAnswers"
-            >決定</base-button
-          >
-        </form>
+        <div class="select-wrapper">
+          <form class="edit__input">
+            <select v-model="selectedArea" class="year-select" name="areas">
+              <option v-for="area in areas" :key="area.id" :value="area">
+                {{ area.name }}
+              </option>
+            </select>
+            <base-button
+              v-if="step === 4"
+              buttonclass="button-edit"
+              :disabled="!selectedArea"
+              @click.prevent="updateAnswers"
+              >決定</base-button
+            >
+          </form>
+        </div>
       </div>
     </transition>
     <p class="user-delete" @click="toggleModal">
@@ -149,12 +157,13 @@ export default {
   },
   data() {
     return {
+      selectedArea: '', // 文字列避けたい
       user: {
         name: '',
         email: 'null',
-        birth_year: null,
+        birth_year: 1994,
         gender: 'male',
-        area_id: null
+        area_id: 1
       },
       step: 1,
       showModal: false
@@ -163,7 +172,7 @@ export default {
   computed: {
     getYears() {
       const years = []
-      for (let i = 2000; i > 1959; i--) {
+      for (let i = 2002; i > 1959; i--) {
         years.push(i)
       }
       return years
@@ -174,6 +183,7 @@ export default {
   },
   methods: {
     updateAnswers() {
+      this.user.area_id = this.selectedArea.id
       if (this.step === 4) {
         this.$axios
           .$put(
@@ -281,8 +291,11 @@ export default {
 }
 .user-delete {
   position: absolute;
-  left: 32px;
+  cursor: pointer;
+  padding: 15px;
+  right: 32px;
   bottom: 32px;
+  text-decoration: underline;
 }
 .popup-text {
   text-align: center;
@@ -294,5 +307,14 @@ export default {
 .popup-buttons {
   display: flex;
   justify-content: space-around;
+}
+.select-wrapper {
+  position: relative;
+  & > .sort-icon {
+    position: absolute;
+    top: 10px;
+    left: calc(50% + 110px);
+    pointer-events: none;
+  }
 }
 </style>
