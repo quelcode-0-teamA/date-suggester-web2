@@ -4,7 +4,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'Date Suggester',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -27,7 +27,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/vuelidate.js' }],
   /*
    ** Nuxt.js dev-modules
    */
@@ -41,13 +41,28 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    'nuxt-fontawesome',
+    ['cookie-universal-nuxt', { parseJSON: false }]
   ],
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      }
+    ]
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: `https://api.date-suggester.com`,
+    headers: {
+      common: { 'Content-Type': 'application/json' }
+    }
+  },
   /*
    ** Build configuration
    */
@@ -55,6 +70,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    // vendor: ['vuelidate'],
     extend(config, ctx) {}
   }
 }

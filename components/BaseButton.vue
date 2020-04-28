@@ -3,7 +3,7 @@
     <button
       v-bind="$attrs"
       class="button"
-      :class="buttonClass"
+      :class="buttonclass"
       v-on="$listeners"
     >
       <!-- inheriting event listeners -->
@@ -16,8 +16,12 @@
 export default {
   inheritAttrs: false,
   props: {
-    buttonClass: {
+    buttonclass: {
       type: String,
+      default: null
+    },
+    value: {
+      type: [Number, String],
       default: null
     }
   }
@@ -26,11 +30,6 @@ export default {
 
 <style lang="scss">
 .button {
-  width: 308px;
-  max-width: 100%;
-  $height: 52px;
-  height: $height;
-  border-radius: $height / 2;
   border: 1px white solid;
   color: white;
   // display: inline-flex;
@@ -43,6 +42,33 @@ export default {
   font-weight: bold;
   transition: all 0.2s linear;
   cursor: pointer;
+  width: 308px;
+  max-width: 100%;
+  $height: 52px;
+  height: $height;
+  border-radius: $height / 2;
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+  }
+  &::-moz-focus-inner {
+    border: none;
+  }
+  &:disabled {
+    opacity: 0.67;
+    cursor: default;
+    &:hover {
+      transform: none;
+    }
+  }
+}
+.-start {
+  width: 308px;
+  max-width: 100%;
+  $height: 52px;
+  height: $height;
+  border-radius: $height / 2;
 }
 .button:hover {
   background-color: rgba($color: white, $alpha: 0.34);
@@ -50,49 +76,130 @@ export default {
   // transform: scale(1.02);
   // box-shadow: 0 7px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+.button-step {
+  width: 228px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #ffe691;
+  box-shadow: 0 4px #d9c47d;
+  border: none;
+  color: #222;
+  &:hover {
+    background-color: #ffce00;
+  }
+  &:disabled {
+    &:hover {
+      background-color: #ffe691;
+    }
+  }
+}
+.button-option {
+  width: 332px;
+  height: 56px;
+  border-radius: 28px;
+  background-color: #ffe691;
+  box-shadow: 0 4px #d9c47d;
+  border: none;
+  color: #222;
+  margin-bottom: 21px;
+  &:hover {
+    background-color: #ffce00;
+  }
+}
+.button-back {
+  width: 152px;
+  height: 56px;
+  color: #a2a2a2;
+  background: transparent;
+  border-color: #a2a2a2;
+  border-radius: 28px;
+  &:hover {
+    color: white;
+    background-color: #a2a2a2;
+    opacity: 0.67;
+  }
+}
+.button-pick {
+  width: 160px;
+  height: 56px;
+  background-color: #ff5492;
+  border-radius: 28px;
+  &:hover {
+    background-color: #ff5492;
+    opacity: 0.67;
+  }
+}
+.button-delete {
+  padding: 0 32px;
+  height: 56px;
+  border-radius: 28px;
+  background-color: rgba($color: #a2a2a2, $alpha: 0.67);
+  color: white;
+  &:hover {
+    background-color: #222;
+    opacity: 0.67;
+  }
+}
+.button-popup-back {
+  width: 152px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid #a2a2a2;
+  color: #5d5d5d;
+  padding: 0 32px;
+  &:hover {
+    background-color: #ff5492;
+    color: white;
+  }
+}
+.button-popup-delete {
+  width: 152px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid #a2a2a2;
+  color: #dd3a3a;
+  &:hover {
+    background-color: rgba($color: #222, $alpha: 0.67);
+    color: white;
+  }
+}
+.button-signin {
+  display: block;
+  margin: 120px auto 0;
+  width: 176px;
+  height: 48px;
+  border: none;
+  border-radius: 24px;
+  background: linear-gradient(to bottom, #ff5f85, #ff8355);
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+.button-edit {
+  width: 176px;
+  height: 40px;
+  margin-top: 125px;
+  &:disabled {
+    &:hover {
+      background: transparent;
+      border: 1px solid white;
+    }
+  }
+}
+.button-gallery {
+  max-width: 308px;
+  height: 58px;
+  border-radius: 29px;
+  background-color: #ff5492;
+  margin-bottom: 70px;
+  &:hover {
+    background-color: #ff5492;
+    opacity: 0.67;
+  }
+}
 .button:active {
-  -webkit-transform: scale(1);
-  transform: scale(1);
+  // -webkit-transform: scale(1);
+  transform: translateY(4px);
   box-shadow: none;
-}
-.button:focus {
-  outline: 0;
-}
-.button.-fill-gradient {
-  background: linear-gradient(to right, #16c0b0, #84cf6a);
-  color: #ffffff;
-}
-.button:disabled {
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  box-shadow: none;
-  background: #eeeeee;
-}
-.button + .button {
-  margin-left: 1em;
-}
-.button.-fill-gray {
-  background: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
-}
-.button.-size-small {
-  height: 32px;
-}
-.button.-icon-right {
-  text-align: left;
-  padding: 0 20px;
-}
-.button.-icon-right > .icon {
-  margin-left: 10px;
-}
-.button.-icon-left {
-  text-align: right;
-  padding: 0 20px;
-}
-.button.-icon-left > .icon {
-  margin-right: 10px;
-}
-.button.-icon-center {
-  padding: 0 20px;
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
   <div>
     <the-header></the-header>
-    <nuxt />
+    <transition name="slide-fade" mode="out-in">
+      <nuxt />
+    </transition>
   </div>
 </template>
 <script>
@@ -10,14 +12,12 @@ export default {
   components: {
     TheHeader
   },
-  data() {}
+  data() {
+    return {}
+  }
 }
 </script>
 <style>
-html,
-body {
-  height: 100%;
-}
 html {
   font-family: 'Hiragino Kaku Gothic Pro';
   font-size: 16px;
@@ -26,8 +26,7 @@ html {
 }
 
 body {
-  background: linear-gradient(to bottom, #ff5d89, #ff8355);
-  background-repeat: no-repeat;
+  background: linear-gradient(to bottom, #ff5f85, #ff8355);
 }
 
 *,
@@ -39,5 +38,18 @@ body {
 
 a {
   text-decoration: none;
+}
+
+.slide-fade-enter {
+  opacity: 0;
+  transform: translateX(10px);
+}
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.5s ease;
+}
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-10px);
 }
 </style>
